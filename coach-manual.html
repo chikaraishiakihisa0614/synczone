@@ -3,660 +3,275 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SyncZone for Ex — コーチ向けマニュアル</title>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Noto+Sans+JP:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<title>SyncZone for Ex — コーチ向けガイド 案A</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
-:root {
-  --ink: #2e2922;
-  --sand: #f5f0e8;
-  --mist: #f9f6f0;
-  --sand-dark: #e8e1d4;
-  --water: #8a9e9a;
-  --water-light: #b0c4c0;
-  --water-pale: #dce9e6;
-  --water-deep: #6a8e8a;
-  --earth: #7a7060;
-  --earth-light: #9a9080;
-  --stone: #c8c2b4;
-  --positive: #5a8a6a;
-  --positive-pale: #e8f2ec;
-  --negative: #8a5a5a;
-  --negative-pale: #f2e8e8;
-  --warning: #8a7a5a;
-  --warning-pale: #f2ede0;
-  --serif: 'Shippori Mincho', serif;
-  --serif-en: 'EB Garamond', serif;
-  --sans: 'Noto Sans JP', sans-serif;
-}
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { font-family: var(--sans); background: var(--sand); color: var(--ink); line-height: 1.8; }
+body { font-family: 'Noto Sans JP', sans-serif; background: #f7f7f5; color: #1a1a1a; line-height: 1.8; }
 
-.site-header {
-  background: var(--ink); padding: 28px 48px;
-  position: sticky; top: 0; z-index: 100;
+header {
+  background: linear-gradient(135deg, #3a8a6a 0%, #3a7a8a 100%); padding: 16px 40px;
+  border-bottom: none;
   display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
 }
-.site-logo { font-family: var(--serif); font-size: 15px; letter-spacing: .16em; color: var(--sand); }
-.site-tag { font-family: var(--serif-en); font-size: 11px; font-style: italic; color: var(--water-light); letter-spacing: .14em; }
+.logo { font-size: 15px; font-weight: 700; letter-spacing: .08em; color: #fff; }
+.logo span { color: #6a8e8a; }
+.tag { font-size: 11px; color: rgba(255,255,255,.9); background: rgba(255,255,255,.2); padding: 4px 10px; border-radius: 20px; }
 
-.toc {
-  background: var(--mist); border-bottom: 0.5px solid var(--sand-dark);
-  padding: 14px 48px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
-}
-.toc-label { font-family: var(--serif-en); font-size: 10px; font-style: italic; color: var(--stone); margin-right: 8px; letter-spacing: .14em; }
-.toc-link { font-size: 11px; color: var(--earth); text-decoration: none; border: 0.5px solid var(--sand-dark); padding: 5px 14px; transition: all .2s; }
-.toc-link:hover { border-color: var(--water); color: var(--water); }
+.toc { background: #fff; border-bottom: 1px solid #e8e8e8; padding: 12px 40px; display: flex; gap: 8px; flex-wrap: wrap; }
+.toc-link { font-size: 12px; color: #666; text-decoration: none; background: #f7f7f5; border: 1px solid #e0e0e0; padding: 5px 14px; border-radius: 20px; transition: all .2s; }
+.toc-link:hover { background: #6a8e8a; color: #fff; border-color: #6a8e8a; }
 
-.hero { background: var(--ink); padding: 64px 48px 56px; position: relative; overflow: hidden; }
-.hero::before { content: ''; position: absolute; bottom: -80px; right: -80px; width: 320px; height: 320px; border-radius: 50%; border: 0.5px solid rgba(176,196,192,.08); }
-.hero-eyebrow { font-family: var(--serif-en); font-size: 11px; font-style: italic; letter-spacing: .2em; color: var(--water-light); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
-.hero-eyebrow-line { width: 24px; height: 0.5px; background: var(--water-light); }
-.hero-title { font-family: var(--serif); font-size: 38px; font-weight: 400; color: var(--sand); line-height: 1.4; margin-bottom: 14px; }
-.hero-sub { font-size: 13px; font-weight: 300; color: rgba(245,240,232,.45); max-width: 560px; line-height: 2; }
+.hero { background: linear-gradient(135deg, #3a8a6a 0%, #3a7a8a 100%); padding: 56px 40px; }
+.hero-badge { display: inline-block; background: transparent; color: #fff; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; border: 2px solid rgba(255,255,255,.8); letter-spacing: .1em; margin-bottom: 16px; }
+.hero-title { font-size: 36px; font-weight: 700; color: #fff; line-height: 1.4; margin-bottom: 14px; }
+.hero-title span { color: #fff; }
+.hero-sub { font-size: 13px; font-weight: 300; color: rgba(255,255,255,.75); max-width: 560px; line-height: 2; }
 
-.container { max-width: 860px; margin: 0 auto; padding: 64px 48px 100px; }
-.section { margin-bottom: 72px; }
+.container { max-width: 860px; margin: 0 auto; padding: 56px 40px 100px; }
+.section { margin-bottom: 64px; }
 
-.section-header { background: var(--ink); padding: 18px 32px; margin-bottom: 2px; display: flex; align-items: center; gap: 16px; }
-.section-num { font-family: var(--serif-en); font-size: 11px; font-style: italic; color: var(--water-light); letter-spacing: .2em; }
-.section-title { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--sand); }
-.section-title-ja { font-size: 12px; font-weight: 300; color: rgba(245,240,232,.4); margin-left: 8px; }
+.sec-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.sec-emoji { font-size: 24px; }
+.sec-title { font-size: 20px; font-weight: 700; color: #1a1a1a; }
 
-/* CONCEPT */
-.concept-box { background: var(--mist); border-left: 3px solid var(--water-light); padding: 28px 32px; margin-bottom: 2px; }
-.concept-box p { font-size: 14px; font-weight: 300; color: var(--earth); line-height: 2; margin-bottom: 12px; }
+.concept-box { background: #fff; border: 1px solid #e8e8e8; border-radius: 12px; padding: 28px 32px; }
+.concept-box p { font-size: 14px; color: #444; line-height: 2; margin-bottom: 12px; }
 .concept-box p:last-child { margin-bottom: 0; }
-.concept-box strong { font-weight: 500; color: var(--ink); }
+.concept-box strong { color: #1a1a1a; }
 
-/* MUST BOX */
-.must-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--sand-dark); margin-bottom: 2px; }
-.must-card { background: var(--mist); padding: 28px 28px; }
-.must-card-title { font-family: var(--serif); font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-.must-badge { display: inline-block; font-size: 9px; color: #fff; background: var(--water-deep); padding: 3px 8px; letter-spacing: .1em; font-family: var(--sans); font-weight: 500; }
+.alert-box { background: #fff8e1; border: 1px solid #ffc107; border-radius: 12px; padding: 16px 20px; margin-top: 12px; font-size: 13px; color: #7a5800; line-height: 1.9; }
+
+.must-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.must-card { background: #fff; border: 1px solid #e8e8e8; border-radius: 12px; padding: 24px; }
+.must-card-title { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
 .must-item { display: flex; gap: 12px; margin-bottom: 16px; align-items: flex-start; }
-.must-item:last-child { margin-bottom: 0; }
-.must-num { font-family: var(--serif-en); font-size: 11px; font-style: italic; color: var(--water); flex-shrink: 0; min-width: 20px; margin-top: 2px; }
-.must-text { font-size: 12px; font-weight: 300; color: var(--earth); line-height: 1.9; }
-.must-text strong { font-weight: 500; color: var(--ink); display: block; margin-bottom: 2px; }
-.must-note { background: var(--water-pale); border-left: 2px solid var(--water-light); padding: 12px 16px; margin-top: 2px; font-size: 11px; color: var(--water-deep); line-height: 1.9; }
+.must-num { font-size: 13px; font-weight: 700; color: #6a8e8a; flex-shrink: 0; min-width: 22px; margin-top: 1px; }
+.must-text { font-size: 12px; color: #444; line-height: 1.9; }
+.must-text strong { color: #1a1a1a; font-weight: 700; display: block; margin-bottom: 2px; }
+.must-note { background: #e8f2ef; border-radius: 8px; padding: 12px 16px; margin-top: 12px; font-size: 11px; color: #3a6e6a; line-height: 1.9; }
+.intent { font-size: 11px; color: #999; margin-top: 4px; }
+.intent strong { color: #6a8e8a; }
 
-/* IMPORTANT BANNER */
-.important-banner { background: var(--ink); padding: 18px 28px; margin: 2px 0; display: flex; align-items: flex-start; gap: 16px; }
-.important-banner-icon { font-family: var(--serif-en); font-size: 10px; font-style: italic; color: var(--water-light); letter-spacing: .14em; flex-shrink: 0; margin-top: 2px; }
-.important-banner-text { font-size: 13px; font-weight: 300; color: rgba(245,240,232,.8); line-height: 1.9; }
-.important-banner-text strong { color: var(--sand); font-weight: 500; }
+.feeling-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.feeling-card { border-radius: 12px; padding: 20px; }
+.feeling-card.positive { background: #e8f5e9; border: 1px solid #a5d6a7; }
+.feeling-card.negative { background: #fce4ec; border: 1px solid #f48fb1; }
+.feeling-label { font-size: 12px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+.feeling-card.positive .feeling-label { color: #2e7d32; }
+.feeling-card.negative .feeling-label { color: #c62828; }
+.feeling-item { font-size: 12px; color: #444; line-height: 1.9; margin-bottom: 4px; padding-left: 10px; border-left: 3px solid; }
+.feeling-card.positive .feeling-item { border-color: #66bb6a; }
+.feeling-card.negative .feeling-item { border-color: #ef9a9a; }
 
-/* SESSION DIVIDER */
-.session-divider { background: var(--water-pale); border-left: 3px solid var(--water); padding: 14px 28px; margin: 40px 0 2px; font-family: var(--serif); font-size: 13px; color: var(--water-deep); letter-spacing: .08em; }
+.check-list { display: flex; flex-direction: column; gap: 8px; }
+.check-item { background: #fff; border: 1px solid #e8e8e8; border-radius: 12px; padding: 18px 20px; }
+.check-title { font-size: 14px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+.check-body { font-size: 12px; color: #666; line-height: 2; }
+.check-note { background: #fff8e1; border-radius: 8px; padding: 10px 14px; margin-top: 10px; font-size: 11px; color: #7a5800; line-height: 1.9; }
+.good-bad { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.good { background: #e8f5e9; border-radius: 8px; padding: 10px 12px; }
+.bad { background: #fce4ec; border-radius: 8px; padding: 10px 12px; }
+.good-label { font-size: 9px; color: #2e7d32; font-weight: 700; margin-bottom: 4px; }
+.bad-label { font-size: 9px; color: #c62828; font-weight: 700; margin-bottom: 4px; }
+.good p, .bad p { font-size: 11px; color: #444; line-height: 1.8; }
 
-/* FEELING GRID */
-.feeling-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--sand-dark); margin-bottom: 2px; }
-.feeling-card { padding: 24px 28px; }
-.feeling-card.positive { background: var(--positive-pale); }
-.feeling-card.negative { background: var(--negative-pale); }
-.feeling-card-label { font-size: 11px; font-weight: 500; letter-spacing: .1em; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-.feeling-card.positive .feeling-card-label { color: var(--positive); }
-.feeling-card.negative .feeling-card-label { color: var(--negative); }
-.feeling-badge { display: inline-block; font-size: 9px; padding: 3px 8px; letter-spacing: .08em; }
-.feeling-card.positive .feeling-badge { background: var(--positive); color: #fff; }
-.feeling-card.negative .feeling-badge { background: var(--negative); color: #fff; }
-.feeling-item { font-size: 12px; font-weight: 300; line-height: 1.9; margin-bottom: 6px; padding-left: 12px; border-left: 2px solid; }
-.feeling-card.positive .feeling-item { color: var(--earth); border-color: var(--positive); }
-.feeling-card.negative .feeling-item { color: var(--earth); border-color: var(--negative); }
+.divider { background: linear-gradient(135deg, #3a8a6a 0%, #3a7a8a 100%); border-radius: 12px; padding: 16px 24px; margin: 40px 0 16px; font-size: 14px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 10px; }
 
-/* CHECKLIST */
-.checklist { display: flex; flex-direction: column; gap: 1px; background: var(--sand-dark); }
-.check-item { background: var(--mist); }
-.check-item-header { padding: 20px 28px; display: flex; align-items: flex-start; gap: 16px; }
-.check-num { font-family: var(--serif-en); font-size: 11px; font-style: italic; color: var(--water); letter-spacing: .1em; flex-shrink: 0; margin-top: 2px; min-width: 28px; }
-.check-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
-.check-body { font-size: 12px; font-weight: 300; color: var(--earth); line-height: 2; }
-.check-must { display: inline-block; font-size: 9px; color: #fff; background: var(--water-deep); padding: 2px 8px; letter-spacing: .08em; margin-left: 8px; vertical-align: middle; }
-.check-note { background: var(--warning-pale); border-left: 2px solid var(--warning); padding: 12px 16px; margin-top: 12px; font-size: 11px; color: var(--warning); line-height: 1.9; }
-.check-good-bad { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
-.check-good { background: var(--positive-pale); padding: 12px 14px; border-left: 2px solid var(--positive); }
-.check-bad { background: var(--negative-pale); padding: 12px 14px; border-left: 2px solid var(--negative); }
-.check-good-label { font-size: 9px; color: var(--positive); font-weight: 500; letter-spacing: .1em; margin-bottom: 6px; }
-.check-bad-label { font-size: 9px; color: var(--negative); font-weight: 500; letter-spacing: .1em; margin-bottom: 6px; }
-.check-good p { font-size: 11px; font-weight: 300; line-height: 1.8; color: var(--positive); }
-.check-bad p { font-size: 11px; font-weight: 300; line-height: 1.8; color: var(--negative); }
+.tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.tip-card { background: #fff; border: 1px solid #e8e8e8; border-radius: 12px; padding: 20px; }
+.tip-icon { font-size: 20px; margin-bottom: 8px; }
+.tip-title { font-size: 13px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+.tip-body { font-size: 12px; color: #666; line-height: 1.9; }
 
-/* TIPS */
-.tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--sand-dark); margin-top: 2px; }
-.tip-card { background: var(--mist); padding: 22px 24px; }
-.tip-icon { font-size: 18px; margin-bottom: 8px; }
-.tip-title { font-size: 12px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
-.tip-body { font-size: 11px; font-weight: 300; color: var(--earth-light); line-height: 1.9; }
+.info-box { background: linear-gradient(135deg, #3a8a6a 0%, #3a7a8a 100%); border-radius: 12px; padding: 20px 24px; margin-top: 12px; font-size: 13px; color: rgba(255,255,255,.9); line-height: 1.9; }
+.info-box strong { color: #fff; }
 
-footer { background: var(--ink); padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; }
-.footer-logo { font-family: var(--serif); font-size: 13px; letter-spacing: .12em; color: var(--sand); }
-.footer-tag { font-family: var(--serif-en); font-size: 11px; font-style: italic; color: var(--water-light); }
+.chart-wrap { background: #fff; border: 1px solid #e8e8e8; border-radius: 12px; padding: 28px; margin-bottom: 12px; }
+.chart-legend { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.legend-card { background: #fff; border: 1px solid #e8e8e8; border-radius: 10px; padding: 14px 16px; }
+.legend-line { width: 24px; height: 3px; border-radius: 2px; margin-bottom: 6px; }
+
+footer { background: linear-gradient(135deg, #3a8a6a 0%, #3a7a8a 100%); padding: 24px 40px; display: flex; justify-content: space-between; align-items: center; }
+.footer-logo { font-size: 13px; font-weight: 700; color: #fff; }
+.footer-tag { font-size: 11px; color: rgba(255,255,255,.7); }
 
 @media (max-width: 768px) {
-  .site-header, .toc, .container, footer { padding-left: 20px; padding-right: 20px; }
-  .hero { padding: 48px 20px 40px; }
-  .hero-title { font-size: 28px; }
-  .must-grid, .feeling-grid, .tips-grid, .check-good-bad { grid-template-columns: 1fr; }
+  header, .toc, .container, footer { padding-left: 20px; padding-right: 20px; }
+  .hero { padding: 40px 20px; }
+  .must-grid, .feeling-grid, .tips-grid, .good-bad, .chart-legend { grid-template-columns: 1fr; }
+  .hero-title { font-size: 26px; }
 }
 </style>
 </head>
 <body>
 
-<header class="site-header">
-  <div class="site-logo">SyncZone for Ex</div>
-  <div class="site-tag">Coach Manual — Confidential</div>
+<header>
+  <div class="logo">SyncZone for Ex</div>
+  <div class="tag">Confidential</div>
 </header>
 
 <nav class="toc">
-  <div class="toc-label">Contents</div>
-  <a href="#concept" class="toc-link">サービスコンセプト</a>
-  <a href="#journey" class="toc-link">カスタマージャーニー</a>
-  <a href="#common" class="toc-link">全セッション共通</a>
-  <a href="#session1" class="toc-link">Session 1</a>
-  <a href="#session2" class="toc-link">Session 2</a>
-  <a href="#session3" class="toc-link">Session 3</a>
-  <a href="#tips" class="toc-link">Tips</a>
+  <a href="#concept" class="toc-link">✨ コンセプト</a>
+  <a href="#journey" class="toc-link">📈 ジャーニー</a>
+  <a href="#common" class="toc-link">✅ 共通事項</a>
+  <a href="#session1" class="toc-link">1️⃣ Session 1</a>
+  <a href="#session2" class="toc-link">2️⃣ Session 2</a>
+  <a href="#session3" class="toc-link">3️⃣ Session 3</a>
+  <a href="#tips" class="toc-link">💡 意識していただきたいこと</a>
 </nav>
 
 <div class="hero">
-  <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div>Coach Manual</div>
-  <div class="hero-title">パートナーコーチの皆様向け<br>セッションガイド</div>
-  <div class="hero-sub">SyncZone for Exをより良いサービスにするために、コーチの皆さんと一緒に作り上げていきたいと思っています。<br><br>進行の順番は自由ですが、各項目の意図を共有させていただいています。ぜひ一読ください。</div>
+  <div class="hero-badge">Session Structure</div>
+  <div class="hero-title">パートナーコーチの皆様向け<br><span>セッションガイド</span></div>
+  <div class="hero-sub">SyncZone for Exをより良いサービスにするために、コーチの皆さんと一緒に作り上げていきたいと思っています！<br><br>進行の順番は自由ですが、各項目の意図を共有させていただいています。ぜひ一読ください。</div>
 </div>
 
 <div class="container">
 
-  <!-- CONCEPT -->
   <div class="section" id="concept">
-    <div class="section-header">
-      <div class="section-num">Overview</div>
-      <div class="section-title">サービスコンセプト</div>
-    </div>
+    <div class="sec-head"><div class="sec-emoji">✨</div><div class="sec-title">サービスコンセプト</div></div>
     <div class="concept-box">
-      <p>SyncZone for Exは<strong>「サウナ×コーチング」</strong>を掛け合わせた、社長・経営者向けのウェルネス×内省サービスです。</p>
+      <p>SyncZone for Exは<strong>「サウナ×コーチング」</strong>を掛け合わせた、<strong>社長・経営者向けのウェルネス×内省サービス</strong>です。</p>
       <p><strong>サウナで頭を整えた状態でコーチングに臨むことで、通常よりも深い内省と本音の言語化が生まれる</strong>と考えています。</p>
       <p>コーチの皆さんには<strong>クライアントの気づき・変化・成長のパートナー</strong>として関わっていただきたいと思っています。各回のセッションを終えた後に<strong>「また次回も受けたい」「モヤモヤが晴れた」「自分一人では気づけなかった。コーチからの問いかけは本当に有用だ」</strong>と思える体験を一緒に目指しましょう。</p>
-      <p>セッションの録音・アンケートデータは事務局にて文字起こしを行い、<strong>後日コーチの皆さんにもご共有します</strong>。<strong>「あの問いかけが刺さった」「このタイミングでもっと深掘りできた」</strong>など、自身のコーチングの質を高める材料としてぜひご活用ください。</p>
+      <p>セッションの録音・アンケートデータは事務局にて文字起こしを行い、<strong>後日コーチの皆さんにもご共有します</strong>。<strong>「あの問いかけが刺さった」「このタイミングでもっと深掘りできた」</strong>など、<strong>自身のコーチングの質を高める材料</strong>としてぜひご活用ください。</p>
     </div>
-    <div class="important-banner">
-      <div class="important-banner-icon">💡 ポイント</div>
-      <div class="important-banner-text">「サウナ×コーチングの掛け合わせは私も初めてで効果は未知数で…」という発言はクライアントの不安につながりやすいです。<strong>サウナ×コーチングの組み合わせの価値を自身も感じているスタンスで臨んでいただけると嬉しいです。</strong></div>
-    </div>
+    <div class="alert-box">⚠️ 「サウナ×コーチングの掛け合わせは私も初めてで効果は未知数で…」という発言はクライアントの不安につながりやすいです。<br><strong>サウナ×コーチングの組み合わせの価値を自身も感じているスタンスで臨んでいただけると嬉しいです！</strong></div>
   </div>
 
-  <!-- CUSTOMER JOURNEY -->
   <div class="section" id="journey">
-    <div class="section-header">
-      <div class="section-num">Journey</div>
-      <div class="section-title">想定されるカスタマージャーニーの推移</div>
+    <div class="sec-head"><div class="sec-emoji">📈</div><div class="sec-title">想定されるカスタマージャーニーの推移</div></div>
+    <div class="chart-wrap"><canvas id="journeyChart"></canvas></div>
+    <div class="chart-legend">
+      <div class="legend-card"><div class="legend-line" style="background:#c0392b;"></div><div style="font-size:12px;font-weight:700;color:#c0392b;margin-bottom:4px;">継続・再契約につながるパターン</div><div style="font-size:11px;color:#666;line-height:1.8;">1回目&2回目で価値を押さえ、2回目で大きく満足度が上昇。</div></div>
+      <div class="legend-card"><div class="legend-line" style="background:#2980b9;"></div><div style="font-size:12px;font-weight:700;color:#2980b9;margin-bottom:4px;">伸び悩むパターン</div><div style="font-size:11px;color:#666;line-height:1.8;">一定の満足はあるが伸び悩む。再利用の可能性は低め。</div></div>
+      <div class="legend-card"><div class="legend-line" style="background:#999;"></div><div style="font-size:12px;font-weight:700;color:#999;margin-bottom:4px;">早期離脱のパターン</div><div style="font-size:11px;color:#666;line-height:1.8;">初回後から満足度が低下。早期離脱のリスクが高い。</div></div>
     </div>
-
-    <div style="background:var(--mist); padding:32px 32px 28px; margin-bottom:2px;">
-      <canvas id="journeyChart" style="width:100%;max-height:320px;"></canvas>
-    </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--sand-dark);margin-bottom:2px;">
-      <div style="background:var(--mist);padding:20px 22px;">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-          <div style="width:28px;height:3px;background:#c0392b;border-radius:2px;"></div>
-          <span style="font-size:11px;font-weight:500;color:#c0392b;">継続・再契約につながるパターン</span>
-        </div>
-        <div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:4px;"><span style="background:#c0392b;color:#fff;padding:2px 10px;font-size:12px;">Good!!</span></div>
-        <div style="font-size:11px;font-weight:300;color:var(--earth-light);line-height:1.9;">1回目&2回目で感じてもらえる価値を押さえ、2回目で大きく満足度が上昇。その後も継続して高水準を維持。</div>
-      </div>
-      <div style="background:var(--mist);padding:20px 22px;">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-          <div style="width:28px;height:3px;background:#2980b9;border-radius:2px;"></div>
-          <span style="font-size:11px;font-weight:500;color:#2980b9;">伸び悩むパターン</span>
-        </div>
-        <div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:4px;"><span style="background:#2980b9;color:#fff;padding:2px 10px;font-size:12px;">Soso…</span></div>
-        <div style="font-size:11px;font-weight:300;color:var(--earth-light);line-height:1.9;">一定の満足はあるが伸び悩む。再利用の可能性はあまり高くない。</div>
-      </div>
-      <div style="background:var(--mist);padding:20px 22px;">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-          <div style="width:28px;height:3px;background:#555;border-radius:2px;"></div>
-          <span style="font-size:11px;font-weight:500;color:#555;">早期離脱のパターン</span>
-        </div>
-        <div style="font-size:13px;font-weight:500;color:var(--ink);margin-bottom:4px;"><span style="background:#555;color:#fff;padding:2px 10px;font-size:12px;">Bad…</span></div>
-        <div style="font-size:11px;font-weight:300;color:var(--earth-light);line-height:1.9;">初回後から満足度が低下。早期離脱につながるリスクが高い。</div>
-      </div>
-    </div>
-
-    <div style="background:var(--ink);padding:18px 28px;display:flex;gap:32px;flex-wrap:wrap;">
-      <div style="display:flex;align-items:flex-start;gap:12px;">
-        <div style="font-family:var(--serif-en);font-size:10px;font-style:italic;color:var(--water-light);letter-spacing:.14em;flex-shrink:0;margin-top:2px;"> 💡 ポイント 01</div>
-        <div style="font-size:12px;font-weight:300;color:rgba(245,240,232,.8);line-height:1.9;">1回目&2回目が最重要。<strong style="color:var(--sand);font-size:13px;">特に2回目。</strong>どこまで満足度を上げられるか？がその後の差別化につながる。</div>
-      </div>
-      <div style="display:flex;align-items:flex-start;gap:12px;">
-        <div style="font-family:var(--serif-en);font-size:10px;font-style:italic;color:var(--water-light);letter-spacing:.14em;flex-shrink:0;margin-top:2px;"> 💡 ポイント 02</div>
-        <div style="font-size:12px;font-weight:300;color:rgba(245,240,232,.8);line-height:1.9;"><span style="color:var(--sand);font-weight:500;">3回目以降に大きな変化はおそらくない。</span>微修正フェーズ。2回目までの積み上げが全て。</div>
-      </div>
-    </div>
+    <div class="info-box">💡 <strong>ポイント 01：</strong>1回目&2回目が最重要。特に<strong>2回目</strong>。どこまで満足度を上げられるか？がその後の差別化につながる。<br>💡 <strong>ポイント 02：</strong><strong>3回目以降に大きな変化はおそらくない。</strong>微修正フェーズ。2回目までの積み上げが全て。</div>
   </div>
 
-  <!-- COMMON -->
   <div class="section" id="common">
-    <div class="section-header">
-      <div class="section-num">Common</div>
-      <div class="section-title">全セッション共通でお願いしたいこと</div>
-    </div>
-
+    <div class="sec-head"><div class="sec-emoji">✅</div><div class="sec-title">全セッション共通でお願いしたいこと</div></div>
     <div class="must-grid">
       <div class="must-card">
-        <div class="must-card-title">セッション中の会話について</div>
-
-        <div class="must-item">
-          <div class="must-num">①</div>
-          <div class="must-text"><strong>サウナの確認</strong>「サウナどうでしたか？整った状態ですか？」<br><span style="font-size:11px;color:var(--earth-light);"><span style="font-weight:500;color:var(--water-deep);">意図：</span>サービスのコアコンセプトをクライアントに浸透させる大切な一言です。</span></div>
-        </div>
-        <div class="must-item">
-          <div class="must-num">②</div>
-          <div class="must-text"><strong>クライアントへの宣言</strong>「今日は●さんのためだけの時間です。正解も不正解もないので、頭の中にあることを自由に話してみてください。一緒に考えていきましょう。」<br><span style="font-size:11px;color:var(--earth-light);"><span style="font-weight:500;color:var(--water-deep);">意図：</span>「この時間は自分のためだ」という意識を持ってもらうことで、本音が引き出しやすくなります。</span></div>
-        </div>
-        <div class="must-item">
-          <div class="must-num">③</div>
-          <div class="must-text"><strong>録音の案内</strong>「文字起こしのために録音させていただきますね。後ほど事務局から展開があるので振り返りにも非常に便利です。第三者に漏洩することはないので安心してください。」<br><span style="font-size:11px;color:var(--earth-light);"><span style="font-weight:500;color:var(--water-deep);">意図：</span>事前に了承は取れていますが、改めて一言添えることでクライアントの安心感が生まれます。</span></div>
-        </div>
-        <div class="must-item">
-          <div class="must-num">④</div>
-          <div class="must-text"><strong>電子機器のオフ</strong>「より深い集中のために、セッション中はスマートフォンや仕事のSlackなどの通知をOFFにしていただけますか？折角ですので、この時間だけはご自身だけに集中しましょう。」<br><span style="font-size:11px;color:var(--earth-light);"><span style="font-weight:500;color:var(--water-deep);">意図：</span>集中モードに切り替えてもらうことでセッションの質が大きく変わります。</span></div>
-        </div>
-        <div class="must-item">
-          <div class="must-num">⑤</div>
-          <div class="must-text"><strong>（2回目以降）ダッシュボードで振り返り</strong>「まずは一緒にパーソナルダッシュボードを見ながら前回からの振り返りをしましょう。」<br><span style="font-size:11px;color:var(--earth-light);"><span style="font-weight:500;color:var(--water-deep);">意図：</span>自分のコンディションの変化が数字で見えることで、クライアントの納得感と成長の実感につながります。</span><br><span style="font-size:11px;color:var(--water-deep);">※パーソナルダッシュボードは後日展開させていただきます。</span></div>
-        </div>
-        <div class="must-item">
-          <div class="must-num">⑥</div>
-          <div class="must-text"><strong>今日のテーマの確認</strong>「今日のテーマは何にしますか？」<br><span style="font-size:11px;color:var(--earth-light);"><span style="font-weight:500;color:var(--water-deep);">意図：</span>テーマを明確にすることで、限られた時間をより深く・実りあるものにしましょう。</span></div>
-        </div>
-        <div class="must-item">
-          <div class="must-num">⑦</div>
-          <div class="must-text"><strong>次回テーマの確認</strong>「次回までに取り組んでみることは何にしますか？」<br><span style="font-size:11px;color:var(--earth-light);"><span style="font-weight:500;color:var(--water-deep);">意図：</span>次回までの取り組みを自分で決めることで、より行動変容につなげます。</span></div>
-        </div>
+        <div class="must-card-title">💬 セッション中の会話について</div>
+        <div class="must-item"><div class="must-num">①</div><div class="must-text"><strong>🧖 サウナの確認</strong>「サウナどうでしたか？整った状態ですか？」<br><div class="intent"><strong>▼意図：</strong> サービスのコアコンセプトをクライアントに浸透させる大切な一言です。</div></div></div>
+        <div class="must-item"><div class="must-num">②</div><div class="must-text"><strong>🙌 クライアントへの宣言</strong>「今日は●さんのためだけの時間です。正解も不正解もないので、頭の中にあることを自由に話してみてください。一緒に考えていきましょう。」<br><div class="intent"><strong>▼意図：</strong> 「この時間は自分のためだ」という意識を持ってもらうことで、本音が引き出しやすくなります。</div></div></div>
+        <div class="must-item"><div class="must-num">③</div><div class="must-text"><strong>🎙️ 録音の案内</strong>「文字起こしのために録音させていただきますね。後ほど事務局から展開があるので振り返りにも非常に便利です。第三者に漏洩することはないので安心してください。」<br><div class="intent"><strong>▼意図：</strong> 事前に了承は取れていますが、改めて一言添えることでクライアントの安心感が生まれます。</div></div></div>
+        <div class="must-item"><div class="must-num">④</div><div class="must-text"><strong>📵 電子機器のオフ</strong>「より深い集中のために、セッション中はスマートフォンや仕事のSlackなどの通知をOFFにしていただけますか？折角ですので、この時間だけはご自身だけに集中しましょう。」<br><div class="intent"><strong>▼意図：</strong> 集中モードに切り替えてもらうことでセッションの質が大きく変わります。</div></div></div>
+        <div class="must-item"><div class="must-num">⑤</div><div class="must-text"><strong>📊 （2回目以降）ダッシュボードで振り返り</strong>「まずは一緒にパーソナルダッシュボードを見ながら前回からの振り返りをしましょう。」<br><div class="intent"><strong>▼意図：</strong> 自分のコンディションの変化が数字で見えることで、クライアントの納得感と成長の実感につながります。</div><div class="intent">※パーソナルダッシュボードは後日展開させていただきます。</div></div></div>
+        <div class="must-item"><div class="must-num">⑥</div><div class="must-text"><strong>🎯 今日のテーマの確認</strong>「今日のテーマは何にしますか？」<br><div class="intent"><strong>▼意図：</strong> テーマを明確にすることで、限られた時間をより深く・実りあるものにしましょう。</div></div></div>
+        <div class="must-item"><div class="must-num">⑦</div><div class="must-text"><strong>🔜 次回テーマの確認</strong>「次回までに取り組んでみることは何にしますか？」<br><div class="intent"><strong>▼意図：</strong> 次回までの取り組みを自分で決めることで、より行動変容につなげます。</div></div></div>
       </div>
-
       <div class="must-card">
-        <div class="must-card-title">セッションを通じてお願いしたいこと</div>
-
-        <div class="must-item">
-          <div class="must-num">①</div>
-          <div class="must-text"><strong>録音データの展開</strong>セッション終了後、録音データを事務局にご共有いただけると助かります。文字起こし・ダッシュボード反映はこちらで行います。録音をお忘れなく！</div>
-        </div>
-        <div class="must-item">
-          <div class="must-num">②</div>
-          <div class="must-text"><strong>次回日程の確定</strong>セッションの最後に次回日程をその場で決めていただけると、クライアントとのやりとりがとてもスムーズになります。ぜひよろしくお願いします。</div>
-        </div>
-
-        <div class="must-note">🎙️ 録音データはお好きなデバイス・アプリでOKです。セッション後にファイルを事務局までご共有ください。※クライアントへの録音了承は事前に事務局にて取得済みです。</div>
+        <div class="must-card-title">📋 セッションを通じてお願いしたいこと</div>
+        <div class="must-item"><div class="must-num">①</div><div class="must-text"><strong>録音データの展開</strong>セッション終了後、録音データを事務局にご共有いただけると助かります。文字起こし・ダッシュボード反映はこちらで行います。録音をお忘れなく！</div></div>
+        <div class="must-item"><div class="must-num">②</div><div class="must-text"><strong>次回日程の確定</strong>セッションの最後に次回日程をその場で決めていただけると、クライアントとのやりとりがとてもスムーズになります。ぜひよろしくお願いします。</div></div>
+        <div class="must-note">🎙️ 録音データは、セッション後にファイルを事務局までご共有ください。<br>※クライアントへの録音了承は事前に事務局にて取得済みです。</div>
       </div>
     </div>
   </div>
 
-  <!-- SESSION 1 -->
   <div class="section" id="session1">
-    <div class="section-header">
-      <div class="section-num">Session 01</div>
-      <div class="section-title">1回目のセッション<span class="section-title-ja">ファーストインプレッションが全て</span></div>
-    </div>
-
+    <div class="sec-head"><div class="sec-emoji">1️⃣</div><div class="sec-title">Session 1 — ファーストインプレッションが全て</div></div>
     <div class="feeling-grid">
-      <div class="feeling-card positive">
-        <div class="feeling-card-label"><span class="feeling-badge">目指したい</span>理想の終わり方</div>
-        <div class="feeling-item">「目標が定まると行動が明確になるな〜（モヤモヤが少し晴れた）」</div>
-        <div class="feeling-item">「自分に向き合う時間ってやはり大事だな！」</div>
-        <div class="feeling-item">「明日●をやる！（何をやろうか？ではなく具体的に）」</div>
-        <div class="feeling-item">「サウナもコーチングもよかった〜次回楽しみ！」</div>
-        <div class="feeling-item">「タイパ・コスパ最高！今日はマジで良い時間だった」</div>
-      </div>
-      <div class="feeling-card negative">
-        <div class="feeling-card-label"><span class="feeling-badge">避けたい</span>NGな終わり方</div>
-        <div class="feeling-item">「意味ないな〜　時間を無駄に使った感…」</div>
-        <div class="feeling-item">「意味ありそうだけど、明日の仕事どうしよう？」</div>
-        <div class="feeling-item">「コーチと人として合わなそう…」</div>
-        <div class="feeling-item">「途中で携帯を見てしまって話が抜けた…」</div>
-        <div class="feeling-item">「で、具体的に何をすればいいんだっけ？」</div>
-      </div>
+      <div class="feeling-card positive"><div class="feeling-label">🌟 理想の終わり方</div><div class="feeling-item">「目標が定まると行動が明確になるな〜（モヤモヤが少し晴れた）」</div><div class="feeling-item">「自分に向き合う時間ってやはり大事だな！」</div><div class="feeling-item">「明日●をやる！（具体的に）」</div><div class="feeling-item">「サウナもコーチングもよかった〜次回楽しみ！」</div><div class="feeling-item">「タイパ・コスパ最高！今日はマジで良い時間だった」</div></div>
+      <div class="feeling-card negative"><div class="feeling-label">💦 NGな終わり方</div><div class="feeling-item">「意味ないな〜　時間を無駄に使った感…」</div><div class="feeling-item">「意味ありそうだけど、明日の仕事どうしよう？」</div><div class="feeling-item">「コーチと人として合わなそう…」</div><div class="feeling-item">「途中で携帯を見てしまって話が抜けた…」</div><div class="feeling-item">「で、具体的に何をすればいいんだっけ？」</div></div>
     </div>
-
-    <div class="checklist" style="margin-top:2px;">
-      <div class="check-item">
-        <div class="check-item-header">
-          <div class="check-num">01</div>
-          <div>
-            <div class="check-title">自己紹介</div>
-            <div class="check-body">職歴サマリー・なぜコーチをしているのか・コーチングを通してクライアントに何を提供したいかをお話しください。</div>
-            <div class="check-note">💡 自己紹介が長くなりすぎると、クライアントの時間が少なくなってしまいます。サラッと済ませてクライアントに主役を渡すイメージで。</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="check-item">
-        <div class="check-item-header">
-          <div class="check-num">02</div>
-          <div>
-            <div class="check-title">コーチングとは？サウナの整い方は？</div>
-            <div class="check-body">クライアントには事前に以下のガイドを事務局より展開済みです。「ご覧いただいていますか？」と確認しつつ、補足があれば随時サラッと添えていただく程度で大丈夫です。<br><br>
-            <span style="font-size:11px;color:var(--water-deep);">📖 コーチングとは？</span><br>
-            <a href="https://chikaraishiakihisa0614.github.io/synczone-coaching/" style="font-size:11px;color:var(--water);word-break:break-all;">https://chikaraishiakihisa0614.github.io/synczone-coaching/</a><br><br>
-            <span style="font-size:11px;color:var(--water-deep);">🧖 サウナの整い方は？</span><br>
-            <a href="https://chikaraishiakihisa0614.github.io/synczone-sauna/" style="font-size:11px;color:var(--water);word-break:break-all;">https://chikaraishiakihisa0614.github.io/synczone-sauna/</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="check-item">
-        <div class="check-item-header">
-          <div class="check-num">03</div>
-          <div>
-            <div class="check-title">次回セッションまでの目標設定</div>
-            <div class="check-body">「初回はお互いを知る場」として目標設定なしで終わるケースが稀にありますが、できれば次回セッションまでの目標をすり合わせていただけると嬉しいです。クライアントの満足度・納得度が大きく変わります。</div>
-            <div class="check-note">💡 ここが2回目の満足度に直結します。ぜひ意識してみてください。</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="check-item">
-        <div class="check-item-header">
-          <div class="check-num">04</div>
-          <div>
-            <div class="check-title">アンケートの案内</div>
-            <div class="check-body">
-              <strong>Weeklyアンケートについて</strong><br>
-              「毎週金曜日にWeeklyアンケートが事務局より届きます。概ね3分程度の内容です。週に一度、少し立ち止まって自分のコンディションを振り返る習慣が、セッションをより深いものにしてくれます。ぜひ続けてみてください。」<br><br>
-              <strong>セッション後アンケートについて</strong><br>
-              「後ほど本日のセッションの振り返りアンケートが届きます。記憶が新しいうちにご記入ください。記入内容はパーソナルダッシュボードに自動反映され、将来的にあなたの資産となります。」
-            </div>
-            <div class="check-note">💡 事務局からも案内しますが、コーチから一言添えてもらえるとクライアントの行動率がぐっと上がります。「あなたのためになるので！」という気持ちで伝えていただけると嬉しいです。</div>
-          </div>
-        </div>
-      </div>
+    <div class="check-list">
+      <div class="check-item"><div class="check-title">👋 自己紹介</div><div class="check-body">職歴サマリー・なぜコーチをしているのか・コーチングを通してクライアントに何を提供したいかをお話しください。<br><div class="check-note">💡 自己紹介が長くなりすぎると、クライアントの時間が少なくなってしまいます。サラッと済ませてクライアントに主役を渡すイメージで。</div></div></div>
+      <div class="check-item"><div class="check-title">🔖 コーチングとは？サウナの整い方は？</div><div class="check-body">クライアントには事前に以下のガイドを事務局より展開済みです。「ご覧いただいていますか？」と確認しつつ、補足があれば随時サラッと添えていただく程度で大丈夫です。<br><br>📖 コーチングとは？<br><a href="https://chikaraishiakihisa0614.github.io/synczone-coaching/" style="color:#6a8e8a;">https://chikaraishiakihisa0614.github.io/synczone-coaching/</a><br><br>🧖 サウナの整い方は？<br><a href="https://chikaraishiakihisa0614.github.io/synczone-sauna/" style="color:#6a8e8a;">https://chikaraishiakihisa0614.github.io/synczone-sauna/</a></div></div>
+      <div class="check-item"><div class="check-title">🎯 次回セッションまでの目標設定</div><div class="check-body">「初回はお互いを知る場」として目標設定なしで終わるケースが稀にありますが、できれば次回セッションまでの目標をすり合わせていただけると嬉しいです。クライアントの満足度・納得度が大きく変わります。<div class="check-note">💡 ここが2回目の満足度に直結します。ぜひ意識してみてください。</div></div></div>
+      <div class="check-item"><div class="check-title">📝 アンケートの案内</div><div class="check-body">▽ <strong>Weeklyアンケートについて</strong><br>「今後、毎週金曜日にWeeklyアンケートが事務局より届きます。概ね3分程度の内容です。週に一度、少し立ち止まって自分のコンディションを振り返る習慣が、セッションをより深いものにしてくれます。ぜひ続けてみてください。」<br><br>▽ <strong>セッション後アンケートについて</strong><br>「後ほど本日のセッションの振り返りアンケートが届きます。記憶が新しいうちにご記入ください。記入内容はパーソナルダッシュボードに自動反映され、将来的にあなたの資産となります。」<div class="check-note">💡 事務局からも案内しますが、コーチから一言添えてもらえるとクライアントの行動率がぐっと上がります。「あなたのためになるので！」という気持ちで伝えていただけると嬉しいです。</div></div></div>
     </div>
   </div>
 
-  <!-- SESSION 2 -->
-  <div class="session-divider">▼ 2回目がサービス満足度の大きな分岐点。1回目で作った信頼をここで深めましょう。</div>
+  <div class="divider">⚡ 2回目がサービス満足度の大きな分岐点。1回目で作った信頼をここで深めましょう。</div>
 
   <div class="section" id="session2">
-    <div class="section-header">
-      <div class="section-num">Session 02</div>
-      <div class="section-title">2回目のセッション<span class="section-title-ja">ここで勝負が決まる</span></div>
-    </div>
-
+    <div class="sec-head"><div class="sec-emoji">2️⃣</div><div class="sec-title">Session 2 — ここで勝負が決まる</div></div>
     <div class="feeling-grid">
-      <div class="feeling-card positive">
-        <div class="feeling-card-label"><span class="feeling-badge">目指したい</span>理想の終わり方</div>
-        <div class="feeling-item">「ダッシュボードを見ながらファクトベースで振り返るのが大事だな〜」</div>
-        <div class="feeling-item">「コーチもちゃんと見てくれている。信頼できる。」</div>
-        <div class="feeling-item">「思考にとどまっていたのが、行動への一歩が踏み出せた！」</div>
-        <div class="feeling-item">「前よりも自分の人生にオーナーシップを持ててるな〜」</div>
-        <div class="feeling-item">「このコーチは自分にとって大事な存在になりそうだ」</div>
-      </div>
-      <div class="feeling-card negative">
-        <div class="feeling-card-label"><span class="feeling-badge">避けたい</span>NGな終わり方</div>
-        <div class="feeling-item">「やっぱり意味ないな〜　時間を無駄に使った感…」</div>
-        <div class="feeling-item">「コーチと人として合わなそう…」</div>
-        <div class="feeling-item">「パーソナルダッシュボードを見ながら話せたらよかったな」</div>
-        <div class="feeling-item">「別に使わないなら入力するの手間だしやめようか…」</div>
-        <div class="feeling-item">「具体的に明日から何をすればいいんだっけ？」</div>
-      </div>
+      <div class="feeling-card positive"><div class="feeling-label">🌟 理想の終わり方</div><div class="feeling-item">「ダッシュボードを見ながらファクトベースで振り返るのが大事だな〜」</div><div class="feeling-item">「コーチもちゃんと見てくれている。信頼できる。」</div><div class="feeling-item">「思考にとどまっていたのが、行動への一歩が踏み出せた！」</div><div class="feeling-item">「前よりも自分の人生にオーナーシップを持ててるな〜」</div><div class="feeling-item">「このコーチは自分にとって大事な存在になりそうだ」</div></div>
+      <div class="feeling-card negative"><div class="feeling-label">💦 NGな終わり方</div><div class="feeling-item">「やっぱり意味ないな〜　時間を無駄に使った感…」</div><div class="feeling-item">「コーチと人として合わなそう…」</div><div class="feeling-item">「パーソナルダッシュボードを見ながら話せたらよかったな」</div><div class="feeling-item">「パーソナルダッシュボードを使わないなら入力するの手間だしやめようか…」</div><div class="feeling-item">「具体的に明日から何をすればいいんだっけ？」</div></div>
     </div>
-
-    <div class="checklist" style="margin-top:2px;">
-      <div class="check-item">
-        <div class="check-item-header">
-          <div class="check-num">01</div>
-          <div>
-            <div class="check-title">前回目標の振り返り</div>
-            <div class="check-body">ダッシュボードで振り返った後に、前回のセッションで立てた目標についてどうだったか聞いてみてください。できた・できなかった論にならず「なぜそうだったのか？次に活かせることは何か？」まで会話できると理想的です。</div>
-            <div class="check-good-bad">
-              <div class="check-good">
-                <div class="check-good-label">◎ 良い例</div>
-                <p>「100点満点とすると何点でしたか？足りなかった点数は何があればできたと思いますか？」</p>
-              </div>
-              <div class="check-bad">
-                <div class="check-bad-label">△ 避けたい例</div>
-                <p>「前よりはよくなりました！」など定性的な評価だけで終わる</p>
-              </div>
-            </div>
-            <div class="check-note">💡 定量的に話すことでお互いの現在地が把握できます。これがあると「なんとなくよかった」ではなく「確かに変わった」という実感につながります。</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="check-item">
-        <div class="check-item-header">
-          <div class="check-num">02</div>
-          <div>
-            <div class="check-title">次回目標の設定</div>
-            <div class="check-body">各回ごとで目標を設定していただいても大丈夫です。前回の目標との連続性を少し意識していただけると、クライアントにとってより深みのある体験になります。「前回から今回の学び→次回までの強化」という流れが自然に生まれると理想的です。</div>
-            <div class="check-note">💡 ここが3回目以降の満足度に直結します。ぜひ意識してみてください。</div>
-          </div>
-        </div>
-      </div>
+    <div class="check-list">
+      <div class="check-item"><div class="check-title">🔍 前回目標の振り返り</div><div class="check-body">ダッシュボードで振り返った後に、前回のセッションで立てた目標についてどうだったか必ず聞きましょう。できた・できなかった論にならず「なぜそうだったのか？次に活かせることは何か？」まで会話できると理想的です。<div class="good-bad"><div class="good"><div class="good-label">◎ 良い例</div><p>「100点満点とすると何点でしたか？足りなかった点数は何があればできたと思いますか？」</p></div><div class="bad"><div class="bad-label">△ 避けたい例</div><p>「前よりはよくなりました！」など定性的な評価だけで終わる</p></div></div><div class="check-note">💡 定量的に話すことでお互いの現在地が把握できます。これがあると「なんとなくよかった」ではなく「確かに変わった」という実感につながります。</div></div></div>
+      <div class="check-item"><div class="check-title">🎯 次回目標の設定</div><div class="check-body">各回ごとで目標を設定していただいても大丈夫ですが、前回の目標との連続性を少し意識していただけると、クライアントにとってより深みのある体験になります。「前回から今回の学び→次回までの強化」という流れが自然に生まれると理想的です。<div class="check-note">💡 ここが3回目以降の満足度に直結します。ぜひ意識してみてください。</div></div></div>
     </div>
   </div>
 
-  <!-- SESSION 3 -->
-  <div class="session-divider">▼ 3回目以降も満足が続くように。2回目までの積み上げを大切に。</div>
+  <div class="divider">⚡ 3回目以降も満足が続くように。2回目までの積み上げを大切に。</div>
 
   <div class="section" id="session3">
-    <div class="section-header">
-      <div class="section-num">Session 03</div>
-      <div class="section-title">3回目のセッション<span class="section-title-ja">継続への分岐点</span></div>
-    </div>
-
+    <div class="sec-head"><div class="sec-emoji">3️⃣</div><div class="sec-title">Session 3 — 継続への分岐点</div></div>
     <div class="feeling-grid">
-      <div class="feeling-card positive">
-        <div class="feeling-card-label"><span class="feeling-badge">目指したい</span>理想の終わり方</div>
-        <div class="feeling-item">「ダッシュボードで振り返ると成長が見える。コーチも把握してくれている。」</div>
-        <div class="feeling-item">「行動への一歩が踏み出せた感覚が嬉しい。自己肯定感が上がる。」</div>
-        <div class="feeling-item">「自分の人生にオーナーシップを持ててきた。」</div>
-        <div class="feeling-item">「次回のセッションが今から楽しみ！」</div>
-        <div class="feeling-item">「このコーチは自分にとって大事な存在だ。」</div>
-      </div>
-      <div class="feeling-card negative">
-        <div class="feeling-card-label"><span class="feeling-badge">避けたい</span>NGな終わり方</div>
-        <div class="feeling-item">「やっぱり意味ないな〜　時間を無駄に使った感…」</div>
-        <div class="feeling-item">「具体的に明日から何をすればいいんだっけ？」</div>
-        <div class="feeling-item">「パーソナルダッシュボードを見ながら話せたらよかったな」</div>
-        <div class="feeling-item">「別に使わないなら入力するの手間だしやめようか…」</div>
-      </div>
+      <div class="feeling-card positive"><div class="feeling-label">🌟 理想の終わり方</div><div class="feeling-item">「ダッシュボードで振り返ると成長が見える。コーチも把握してくれている。」</div><div class="feeling-item">「行動への一歩が踏み出せた感覚が嬉しい。自己肯定感が上がる。」</div><div class="feeling-item">「自分の人生にオーナーシップを持ててきた。」</div><div class="feeling-item">「次回のセッションが今から楽しみ！」</div><div class="feeling-item">「このコーチは自分にとって大事な存在だ。」</div></div>
+      <div class="feeling-card negative"><div class="feeling-label">💦 NGな終わり方</div><div class="feeling-item">「やっぱり意味ないな〜　時間を無駄に使った感…」</div><div class="feeling-item">「具体的に明日から何をすればいいんだっけ？」</div><div class="feeling-item">「パーソナルダッシュボードを見ながら話せたらよかったな」</div><div class="feeling-item">「パーソナルダッシュボードを使わないなら入力するの手間だしやめようか…」</div></div>
     </div>
-
-    <div class="checklist" style="margin-top:2px;">
-      <div class="check-item">
-        <div class="check-item-header">
-          <div class="check-num">01</div>
-          <div>
-            <div class="check-title">前回目標の振り返り</div>
-            <div class="check-body">2回目と同様に定量的な振り返りを。「100点満点で何点？」のフォーマットで現在地を一緒に確認してみてください。目標をプレッシャーにしすぎず、できた・できなかったに関わらず「なぜ？→次に活かせることは？」の流れを意識していただけると嬉しいです。</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="check-item">
-        <div class="check-item-header">
-          <div class="check-num">02</div>
-          <div>
-            <div class="check-title">次回目標の設定</div>
-            <div class="check-body">各回ごとで目標を設定していただいても大丈夫です。3回を通じた流れの中で「今回の学び→次回までの強化」が自然につながるよう意識していただけると、クライアントにとってより大きな変化につながります。</div>
-          </div>
-        </div>
-      </div>
+    <div class="check-list">
+      <div class="check-item"><div class="check-title">🔍 前回目標の振り返り</div><div class="check-body">2回目と同様に定量的な振り返りを。「100点満点で何点？」のフォーマットで現在地を一緒に確認してみてください。目標をプレッシャーにしすぎず、できた・できなかったに関わらず「なぜ？→次に活かせることは？」の流れを意識していただけると嬉しいです。</div></div>
+      <div class="check-item"><div class="check-title">🎯 次回目標の設定</div><div class="check-body">各回ごとで目標を設定していただいても大丈夫ですが、3回を通じた流れの中で「今回の学び→次回までの強化」が自然につながるよう意識していただけると、クライアントにとってより大きな変化につながります。</div></div>
     </div>
   </div>
 
-  <!-- TIPS -->
   <div class="section" id="tips">
-    <div class="section-header">
-      <div class="section-num">Tips</div>
-      <div class="section-title">全セッション共通で意識してほしいこと</div>
-    </div>
+    <div class="sec-head"><div class="sec-emoji">💡</div><div class="sec-title">全セッション共通で意識していただきたいこと</div></div>
     <div class="tips-grid">
-      <div class="tip-card">
-        <div class="tip-icon">🎯</div>
-        <div class="tip-title">目標はできれば定量化する</div>
-        <div class="tip-body">「前よりよくなった」ではなく「100点満点で何点？」で現在地を共有。定量化することでクライアントの納得度が上がり、継続率につながります。</div>
-      </div>
-      <div class="tip-card">
-        <div class="tip-icon">📊</div>
-        <div class="tip-title">ダッシュボードを必ず活用</div>
-        <div class="tip-body">ダッシュボードを見ながらの振り返りはSyncZone for Exの差別化ポイントです。「ぼんやりとどうでしたか？」ではなく「一緒に見ながら振り返ろう」を徹底してください。</div>
-      </div>
-      <div class="tip-card">
-        <div class="tip-icon">🎙️</div>
-        <div class="tip-title">必ず録音する</div>
-        <div class="tip-body">毎回セッションの録音を行い、終了後に録音データを事務局に展開してください。文字起こし・ダッシュボードへの反映はこちらで行います。</div>
-      </div>
-      <div class="tip-card">
-        <div class="tip-icon">🧘</div>
-        <div class="tip-title">サウナとの連携を大切に</div>
-        <div class="tip-body">毎回冒頭に「サウナどうでしたか？整いましたか？」を必ず聞いてください。サービスコンセプトをクライアントに浸透させる重要な問いかけです。</div>
-      </div>
-      <div class="tip-card">
-        <div class="tip-icon">📅</div>
-        <div class="tip-title">次回日程はその場で確定</div>
-        <div class="tip-body">「また連絡します」で終わらせずに、セッション終了前に次回日程を確定してください。双方のコミュニケーションコストを最小化します。</div>
-      </div>
-      <div class="tip-card">
-        <div class="tip-icon">🎉</div>
-        <div class="tip-title">ぜひ楽しんでください！</div>
-        <div class="tip-body">何よりコーチ自身がセッションを楽しんでいることが、クライアントにとって一番の安心感につながります。</div>
-      </div>
+      <div class="tip-card"><div class="tip-icon">🎯</div><div class="tip-title">目標はできれば定量化する</div><div class="tip-body">「前よりよくなった」ではなく「100点満点で何点？」で現在地を共有。定量化することでクライアントの納得度が上がり、継続率につながります。</div></div>
+      <div class="tip-card"><div class="tip-icon">📊</div><div class="tip-title">ダッシュボードを必ず活用</div><div class="tip-body">ダッシュボードを見ながらの振り返りはSyncZone for Exの差別化ポイントです。「一緒に見ながら振り返ろう」を徹底してください。</div></div>
+      <div class="tip-card"><div class="tip-icon">🎙️</div><div class="tip-title">必ず録音する</div><div class="tip-body">毎回セッションの録音を行い、終了後に録音データを事務局に展開してください。文字起こし・ダッシュボードへの反映はこちらで行います。</div></div>
+      <div class="tip-card"><div class="tip-icon">🧖</div><div class="tip-title">サウナとの連携を大切に</div><div class="tip-body">毎回冒頭に「サウナどうでしたか？整いましたか？」を必ず聞いてください。サービスコンセプトをクライアントに浸透させる重要な問いかけです。</div></div>
+      <div class="tip-card"><div class="tip-icon">📅</div><div class="tip-title">次回日程はその場で確定</div><div class="tip-body">「また連絡します」で終わらせずに、セッション終了前に次回日程を確定してください。双方のコミュニケーションコストを最小化します。</div></div>
+      <div class="tip-card"><div class="tip-icon">🎉</div><div class="tip-title">ぜひ楽しんでください！</div><div class="tip-body">何よりコーチ自身がセッションを楽しんでいることが、クライアントにとって一番の安心感につながります。</div></div>
     </div>
-    <div class="important-banner" style="margin-top:2px;">
-      <div class="important-banner-icon">💡 ポイント</div>
-      <div class="important-banner-text">このガイドに関するご質問やフィードバックはいつでも事務局までご連絡ください。<strong>皆さんの現場の声がサービスをより良くします。一緒に作っていきましょう！</strong></div>
-    </div>
+    <div class="info-box" style="margin-top:16px;">このガイドに関するご質問やフィードバックはいつでも事務局までご連絡ください。<br><strong style="font-size:15px;display:block;margin-top:8px;">皆さんの現場の声がサービスをより良くします。一緒に作っていきましょう！🎉</strong></div>
   </div>
 
 </div>
 
+<footer>
+  <div class="footer-logo">SyncZone for Ex</div>
+  <div class="footer-tag">Confidential</div>
+</footer>
+
 <script>
 const ctx = document.getElementById('journeyChart').getContext('2d');
 const labels = ['1回目', '2回目', '3回目', '4回目'];
-
-// ベジェ曲線風のデータ
 const dataA = [30, 72, 88, 95];
 const dataB = [28, 48, 55, 58];
 const dataC = [25, 38, 30, 22];
-
 new Chart(ctx, {
   type: 'line',
   data: {
     labels,
     datasets: [
-      {
-        label: 'A：継続可能性／満足度 Good!!',
-        data: dataA,
-        borderColor: '#c0392b',
-        backgroundColor: 'rgba(192,57,43,0.06)',
-        borderWidth: 2.5,
-        pointBackgroundColor: '#c0392b',
-        pointBorderColor: '#f9f6f0',
-        pointBorderWidth: 2,
-        pointRadius: 5,
-        tension: 0.45,
-        fill: false,
-      },
-      {
-        label: 'B：継続可能性／満足度 Soso…',
-        data: dataB,
-        borderColor: '#2980b9',
-        backgroundColor: 'rgba(41,128,185,0.06)',
-        borderWidth: 2.5,
-        pointBackgroundColor: '#2980b9',
-        pointBorderColor: '#f9f6f0',
-        pointBorderWidth: 2,
-        pointRadius: 5,
-        tension: 0.45,
-        fill: false,
-      },
-      {
-        label: 'C：チャーンの可能性大 Bad…',
-        data: dataC,
-        borderColor: '#555',
-        backgroundColor: 'rgba(85,85,85,0.04)',
-        borderWidth: 2.5,
-        pointBackgroundColor: '#555',
-        pointBorderColor: '#f9f6f0',
-        pointBorderWidth: 2,
-        pointRadius: 5,
-        tension: 0.45,
-        fill: false,
-      },
+      { label: 'Good!!', data: dataA, borderColor: '#c0392b', borderWidth: 2.5, pointBackgroundColor: '#FFD700', pointBorderColor: '#FFD700', pointBorderWidth: 1, pointRadius: 14, pointStyle: 'star', tension: 0.45, fill: false },
+      { label: 'Soso…', data: dataB, borderColor: '#2980b9', borderWidth: 2.5, pointBackgroundColor: '#2980b9', pointBorderColor: '#f7f7f5', pointBorderWidth: 2, pointRadius: 5, tension: 0.45, fill: false },
+      { label: 'Bad…', data: dataC, borderColor: '#999', borderWidth: 2.5, pointBackgroundColor: '#999', pointBorderColor: '#f7f7f5', pointBorderWidth: 2, pointRadius: 5, tension: 0.45, fill: false },
     ]
   },
   options: {
-    responsive: true,
-    maintainAspectRatio: true,
-    aspectRatio: 2.8,
-    plugins: {
-      legend: { display: false },
-      tooltip: {
-        backgroundColor: '#2e2922',
-        titleColor: '#f5f0e8',
-        bodyColor: 'rgba(245,240,232,.7)',
-        borderColor: 'rgba(255,255,255,.05)',
-        borderWidth: 1,
-        padding: 12,
-        callbacks: {
-          label: ctx => ` ${ctx.dataset.label.split('：')[0]}：満足度 ${ctx.raw}%`
-        }
-      }
-    },
+    responsive: true, maintainAspectRatio: true, aspectRatio: 2.8,
+    plugins: { legend: { display: false } },
     scales: {
-      y: {
-        min: 0, max: 100,
-        ticks: {
-          color: '#9a9080', font: { size: 10, family: 'Noto Sans JP' },
-          callback: v => v + '%', stepSize: 25
-        },
-        grid: { color: 'rgba(200,194,180,0.25)', lineWidth: 0.5 },
-        border: { display: false },
-        title: { display: true, text: '継続可能性・満足度', color: '#9a9080', font: { size: 10 } }
-      },
-      x: {
-        ticks: { color: '#7a7060', font: { size: 11, family: 'Noto Sans JP', weight: '500' } },
-        grid: { color: 'rgba(200,194,180,0.15)', lineWidth: 0.5 },
-        border: { display: false }
-      }
+      y: { min: 0, max: 100, ticks: { color: '#999', font: { size: 10 }, callback: v => v + '%', stepSize: 25 }, grid: { color: 'rgba(0,0,0,0.06)' }, border: { display: false } },
+      x: { ticks: { color: '#666', font: { size: 11, weight: '500' } }, grid: { display: false }, border: { display: false } }
     },
     animation: { duration: 0 }
   }
 });
-
-// 2回目に「最重要」注釈を描画
-Chart.register({
-  id: 'session2annotation',
-  afterDraw(chart) {
-    const { ctx, scales } = chart;
-    const x = scales.x.getPixelForValue(1); // 2回目のx座標
-    ctx.save();
-    ctx.setLineDash([4, 4]);
-    ctx.strokeStyle = 'rgba(138,158,154,0.4)';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(x, scales.y.top);
-    ctx.lineTo(x, scales.y.bottom);
-    ctx.stroke();
-    ctx.setLineDash([]);
-    ctx.fillStyle = '#8a9e9a';
-    ctx.font = '10px Noto Sans JP';
-    ctx.textAlign = 'center';
-    ctx.fillText('最重要', x, scales.y.top - 6);
-    ctx.restore();
-  }
-});
+Chart.register({ id: 'annotation', afterDraw(chart) {
+  const { ctx, scales } = chart;
+  const x = scales.x.getPixelForValue(1);
+  ctx.save(); ctx.setLineDash([4,4]); ctx.strokeStyle = 'rgba(106,142,138,0.5)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(x, scales.y.top); ctx.lineTo(x, scales.y.bottom); ctx.stroke();
+  ctx.setLineDash([]); ctx.fillStyle = '#6a8e8a'; ctx.font = 'bold 10px Noto Sans JP'; ctx.textAlign = 'center';
+  ctx.fillText('最重要', x, scales.y.top - 6); ctx.restore();
+}});
 </script>
-
-<footer>
-  <div class="footer-logo">SyncZone for Ex</div>
-  <div class="footer-tag">Coach Manual — Confidential</div>
-</footer>
-
 </body>
 </html>
