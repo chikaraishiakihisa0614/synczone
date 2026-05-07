@@ -580,7 +580,7 @@ nav.scrolled {
   background: var(--sand-deeper);
   margin: 44px 0;
 }
-.comp-card { padding: 32px 28px; background: var(--sand); }
+.comp-card { display: flex; flex-direction: column; padding: 32px 28px; background: var(--sand); }
 .comp-card.dark { background: var(--ink-light); }
 .comp-label {
   font-family: var(--serif-en);
@@ -846,6 +846,26 @@ footer {
   .footer-right { align-items: center; }
   .pain-grid, .vs-grid, .compare-grid { grid-template-columns: 1fr; }
   .sec-divider { padding: 0 24px; }
+
+  body { font-size: 16px; }
+  .hero-headline { font-size: 36px; line-height: 1.4; }
+  .hero-body { font-size: 15px; line-height: 2; }
+  .hero-catch { font-size: 16px; }
+  .sec-headline { font-size: 26px; line-height: 1.5; }
+  .sec-body { font-size: 15px; line-height: 2; }
+  .sec-eyebrow-text { font-size: 12px; }
+  .pain-q { font-size: 15px; }
+  .pain-b { font-size: 14px; }
+  .vs-item { font-size: 14px; }
+  .step-title { font-size: 16px; }
+  .step-body { font-size: 14px; }
+  .cta-headline { font-size: 32px; }
+  .cond-text { font-size: 15px; }
+  .fact-num { font-size: 36px; }
+  .fact-label { font-size: 13px; }
+  .bridge { font-size: 15px; line-height: 2; }
+  .map-num { font-size: 20px; }
+  .map-num-sm { font-size: 15px; }
 }
 </style>
 </head>
@@ -870,7 +890,7 @@ footer {
     </div>
     <h1 class="hero-headline"><span style="color:#c9a84c;">AIが賢くなるほど、</span><br><span style="color:#c9a84c;">経営者は孤独に</span><br><span style="color:#c9a84c;">なっていく。</span></h1>
     <p class="hero-body">
-      情報は増えた。分析は速くなった。AIが最適解を出してくれる。<br>
+      情報は増えた。<br>分析は速くなった。<br>AIが最適解を出してくれる。<br>
       でも、「自分はどこへ向かいたいのか」という問いに、AIは答えられない。<br><br>
       意思決定の量が増えるほど、本質を考える時間は消える。<br>
       SyncZoneは、その孤独に、初めて場所を作った。
@@ -966,7 +986,7 @@ footer {
         <div class="pain-b">「このままでいいのか」という問いが、ずっと頭の隅にある。でも立ち止まれない。</div>
       </div>
     </div>
-    <p class="sec-body">誰もが知っている。経営者が孤独だということを。でも誰も、その孤独を解消する場所を作ってこなかった。</p>
+    <p class="sec-body">誰もが知っている。<br>経営者が孤独だということを。<br>でも誰も、その孤独を解消する場所を作ってこなかった。</p>
   </div>
 </section>
 
@@ -984,7 +1004,7 @@ footer {
       <div class="sec-eyebrow-text">The Context</div>
     </div>
     <h2 class="sec-headline">「自分の頭で深く考える時間」が、<br>経営者最大の競争優位に<br>なりつつある。</h2>
-    <p class="sec-body">正解のない時代に、意思決定の難易度は増し続けている。AIが情報処理を肩代わりするほど、「何を問うか」という思考の質が、経営者の差を生む。</p>
+    <p class="sec-body">正解のない時代に、意思決定の難易度は増し続けている。<br>AIが情報処理を肩代わりするほど、「何を問うか」という思考の質が、経営者の差を生む。</p>
     <p class="sec-body">その流れの中で、コーチングを取り入れる経営者が増えている。</p>
     
     <!-- WORLD MAP -->
@@ -1007,7 +1027,7 @@ footer {
         <div class="fact-text">日本でもコーチ・エィ、ビジネスコーチ株式会社が上場するなど、市場は急速に拡大中。</div>
       </div>
     </div>
-    <p class="sec-body">コーチングはもはや自己啓発ではない。意思決定インフラだ。</p>
+    <p class="sec-body">コーチングはもはや自己啓発ではない。<br>意思決定インフラだ。</p>
     <div class="bridge">ただ、需要が高まるほど、一つの問題が浮かび上がってくる。<br>従来のコーチングには、構造的な欠陥がある。</div>
   </div>
 </section>
@@ -1026,7 +1046,7 @@ footer {
       <div class="sec-eyebrow-text">The Gap</div>
     </div>
     <h2 class="sec-headline">でも、従来のコーチングには<br>構造的な欠陥がある。</h2>
-    <p class="sec-body">画面の前に座った瞬間、あなたはすでに「経営者モード」に戻っている。雑念を抱えたまま、「うまく話さなければ」と気負いながらセッションを始める。それでは、本音は出ない。</p>
+    <p class="sec-body">画面の前に座った瞬間、あなたはすでに「経営者モード」に戻っている。<br>雑念を抱えたまま、「うまく話さなければ」と気負いながらセッションを始める。<br>それでは、本音は出ない。</p>
     <div class="vs-grid">
       <div class="vs-card">
         <div class="vs-label vs-label-old">従来のコーチング</div>
@@ -1065,19 +1085,19 @@ footer {
       <div class="sec-eyebrow-text">The Difference</div>
     </div>
     <h2 class="sec-headline">「コーチングに行こう」ではなく、<br>「サウナに行こう」でいい。</h2>
-    <p class="sec-body">向き合わなければ。成長しなければ。変わらなければ。コーチングにはどこか、そういう重力がある。</p>
+    <p class="sec-body">向き合わなければ。成長しなければ。変わらなければ。<br>コーチングにはどこか、そういう重力がある。</p>
     <p class="sec-body">でもサウナは違う。ただ、疲れたから行く。ととのいたいから行く。それだけでいい。ととのった後、コーチと話す。気張らなくていい。頭が空になった状態で話しているうちに、ずっと後回しにしていた問いが、自然と出てくる。</p>
     <img src="https://chikaraishiakihisa0614.github.io/synczone/img_08.jpg" alt="サウナ" class="sec-img"/>
     <div class="compare-grid">
       <div class="comp-card">
         <div class="comp-label comp-label-old">従来のコーチング</div>
         <div class="comp-emo comp-emo-old">「良いとはわかってる。でも、今日はしんどい。」</div>
-        <div class="comp-sub comp-sub-old">義務感・緊張感・ハードルの高さ。続けるのがつらくなる。</div>
+        <div class="comp-sub comp-sub-old" style="margin-top:auto;">義務感・緊張感・ハードルの高さ。続けるのがつらくなる。</div>
       </div>
       <div class="comp-card dark">
         <div class="comp-label comp-label-new">SyncZone</div>
-        <div class="comp-emo comp-emo-new">「今日、サウナ行ける日だ」</div>
-        <div class="comp-sub comp-sub-new">楽しみ・ご褒美・リセット。気づいたら、深く考えていた。</div>
+        <div class="comp-emo comp-emo-new">「今日、サウナ行ける日だ。」</div>
+        <div class="comp-sub comp-sub-new" style="margin-top:auto;">楽しみ・ご褒美・リセット。気づいたら、深く考えていた。</div>
       </div>
     </div>
     <div class="oasis-text">常に緊張状態にある経営者にとって、<br>SyncZoneはコーチングサービスである前に、心のオアシスだ。</div>
@@ -1121,7 +1141,7 @@ footer {
         <div class="step-content">
           <img src="https://chikaraishiakihisa0614.github.io/synczone/img_11.png" alt="会話" class="step-illust"/>
           <div class="step-text"><div class="step-title">普段は言葉にできないことが、するりと出てくる</div>
-          <div class="step-body">ずっと後回しにしてきた問いが、引き出される。「なぜ自分はこれをやっているのか」「本当に向かいたい場所はどこか」——そういう問いと、静かに向き合える時間。</div></div>
+          <div class="step-body">ずっと後回しにしてきた問いが、引き出される。<br>「なぜ自分はこれをやっているのか」「本当に向かいたい場所はどこか」——そういう問いと、静かに向き合える時間。</div></div>
 
         </div>
       </div>
@@ -1130,7 +1150,7 @@ footer {
         <div class="step-content">
           <img src="https://chikaraishiakihisa0614.github.io/synczone/img_12.png" alt="ダッシュボード" class="step-illust"/>
           <div class="step-text"><div class="step-title">思考が、資産として積み上がっていく</div>
-          <div class="step-body">セッションは毎回録音・文字起こしされ、自分専用のダッシュボードに蓄積される。1年後に読み返したとき、自分がどう変わったかが、ありありと見える。思考は、積み上げるほど武器になる。</div></div>
+          <div class="step-body">セッションは毎回録音・文字起こしされ、自分専用のダッシュボードに蓄積される。<br>1年後に読み返したとき、自分がどう変わったかが、ありありと見える。思考は、積み上げるほど武器になる。</div></div>
         </div>
       </div>
     </div>
@@ -1152,7 +1172,7 @@ footer {
     <div class="cta-conditions fade-in">
       <div class="cta-cond">
         <div class="cond-mark">i.</div>
-        <div class="cond-text"><strong>3回が1セット</strong> — 1回や2回では、変化は見えにくい。3回目に何かが変わる。</div>
+        <div class="cond-text"><strong>3回が1セット</strong><br>—1回や2回では、変化は見えにくい。3回目に何かが変わる。</div>
         <img src="https://chikaraishiakihisa0614.github.io/synczone/img_13.jpg" alt="回数と効果のイメージ" class="cta-img"/>
       </div>
       <div class="cta-cond">
