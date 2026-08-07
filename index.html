@@ -892,6 +892,96 @@ footer {
 }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 
+/* ========== COACHES ========== */
+.coach-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--sand-deeper);
+  margin: 48px 0 8px;
+}
+.coach-card {
+  background: var(--sand);
+  padding: 34px 26px;
+  display: flex;
+  flex-direction: column;
+  transition: background .3s;
+}
+.coach-card:hover { background: var(--steam); }
+.coach-num {
+  font-family: var(--serif-en);
+  font-size: 10px;
+  font-style: italic;
+  color: var(--water);
+  letter-spacing: .12em;
+  margin-bottom: 14px;
+}
+.coach-role {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+.coach-sub {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: .06em;
+  color: var(--water);
+  margin-bottom: 18px;
+}
+.coach-desc {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: var(--earth);
+  line-height: 2.05;
+  margin-bottom: 22px;
+}
+.coach-tags-label {
+  font-family: var(--serif-en);
+  font-size: 9px;
+  font-style: italic;
+  letter-spacing: .16em;
+  color: var(--water);
+  margin-bottom: 10px;
+}
+.coach-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 22px;
+}
+.coach-tag {
+  font-size: 10.5px;
+  font-weight: 300;
+  letter-spacing: .02em;
+  color: var(--earth);
+  background: var(--water-pale);
+  border: 0.5px solid var(--water-light);
+  border-radius: 2px;
+  padding: 5px 11px;
+  line-height: 1.5;
+}
+.coach-meta {
+  font-size: 11.5px;
+  font-weight: 300;
+  color: var(--earth-light);
+  line-height: 1.95;
+  border-top: 0.5px solid var(--sand-deeper);
+  padding-top: 16px;
+  margin-top: auto;
+}
+.coach-meta strong { color: var(--ink); font-weight: 500; }
+.coach-note {
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--stone-dark);
+  letter-spacing: .04em;
+  line-height: 1.9;
+  margin-top: 28px;
+}
+
 /* ========== RESPONSIVE ========== */
 @media (max-width: 900px) {
   nav { padding: 18px 24px; }
@@ -903,7 +993,7 @@ footer {
   .cta-sec { padding: 88px 24px; }
   footer { padding: 32px 24px; flex-direction: column; gap: 16px; text-align: center; }
   .footer-right { align-items: center; }
-  .pain-grid, .vs-grid, .compare-grid { grid-template-columns: 1fr; }
+  .pain-grid, .vs-grid, .compare-grid, .coach-grid { grid-template-columns: 1fr; }
   .sec-divider { padding: 0 24px; }
 
   body { font-size: 16px; }
@@ -1218,6 +1308,66 @@ footer {
       <div class="position-label">SyncZoneのポジション</div>
       <div class="position-text">コーチングでもウェルネスでもない。「デジタルノイズと人間関係のノイズを同時に遮断した状態で、自分の本質的な問いと向き合う時間」を設計したサービス。</div>
     </div>
+  </div>
+</section>
+
+<div class="sec-divider">
+  <div class="sec-divider-line"></div>
+  <div class="sec-divider-drop"></div>
+  <div class="sec-divider-line"></div>
+</div>
+
+<!-- SECTION 6 : COACHES -->
+<section class="sec alt">
+  <div class="sec-inner fade-in">
+    <div class="sec-eyebrow">
+      <div class="sec-eyebrow-line"></div>
+      <div class="sec-eyebrow-text">Our Coaches</div>
+    </div>
+    <h2 class="sec-headline">担当するコーチは、<br>現場を知るプロたち。</h2>
+    <p class="sec-body">事業・組織・人の現場をくぐり抜けてきたプロフェッショナルが揃っています。国際コーチング連盟（ICF）をはじめとする認定資格をもとに、経営層・リーダーの意思決定と変化に伴走します。</p>
+    <div class="coach-grid">
+      <div class="coach-card">
+        <div class="coach-num">i.</div>
+        <div class="coach-role">元・BtoB SaaS企業の<br>エンジニアリングマネージャー</div>
+        <div class="coach-sub">現 プロコーチ／システムコーチ</div>
+        <div class="coach-desc">エンジニアリング組織のマネジメントを経て、コーチへ。経営層・リーダーの意思決定と「あり方」の変容に伴走します。</div>
+        <div class="coach-tags-label">Themes</div>
+        <div class="coach-tags">
+          <span class="coach-tag">エグゼクティブ</span>
+          <span class="coach-tag">システムコーチング</span>
+          <span class="coach-tag">リーダーシップ開発</span>
+        </div>
+        <div class="coach-meta"><strong>ICF認定 PCC</strong> ほか国際コーチング資格<br>コーチング<strong>1,500時間</strong>以上／累積<strong>150名</strong>以上</div>
+      </div>
+      <div class="coach-card">
+        <div class="coach-num">ii.</div>
+        <div class="coach-role">現役 SaaS企業の<br>人事役員（CHRO）</div>
+        <div class="coach-sub">キャリアコンサルタント（国家資格）</div>
+        <div class="coach-desc">新規事業の立ち上げと約300名規模の組織マネジメントを経て、人事のプロへ。事業と組織が持続的に成長する戦略を、共に考えます。</div>
+        <div class="coach-tags-label">Themes</div>
+        <div class="coach-tags">
+          <span class="coach-tag">経営・組織づくり</span>
+          <span class="coach-tag">人材・キャリア戦略</span>
+          <span class="coach-tag">意思決定</span>
+        </div>
+        <div class="coach-meta"><strong>国家資格 キャリアコンサルタント</strong><br>事業・営業 <strong>10年</strong>／人事領域 <strong>16年</strong></div>
+      </div>
+      <div class="coach-card">
+        <div class="coach-num">iii.</div>
+        <div class="coach-role">コーチング会社 代表／<br>多様な事業会社出身</div>
+        <div class="coach-sub">プロフェッショナルコーチ</div>
+        <div class="coach-desc">人材・SaaS・製造・製薬など多様な業界経験を経て、プロコーチへ。クライアントのライフ＆キャリアを最高にする戦略を、共に描きます。</div>
+        <div class="coach-tags-label">Themes</div>
+        <div class="coach-tags">
+          <span class="coach-tag">経営・事業成長</span>
+          <span class="coach-tag">キャリア開発</span>
+          <span class="coach-tag">組織づくり</span>
+        </div>
+        <div class="coach-meta"><strong>生涯学習開発財団認定</strong><br>プロフェッショナルコーチ</div>
+      </div>
+    </div>
+    <p class="coach-note">※ コーチングは国際コーチング連盟（ICF）のコア・コンピテンシーと倫理規定に基づいて行っています。</p>
   </div>
 </section>
 
