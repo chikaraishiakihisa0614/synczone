@@ -982,6 +982,85 @@ footer {
   margin-top: 28px;
 }
 
+/* ========== FOUNDER ========== */
+.founder {
+  margin: 44px 0 8px;
+  padding: 40px 38px;
+  background: var(--steam);
+  border: 0.5px solid var(--sand-deeper);
+  border-left: 2px solid var(--water-light);
+}
+.founder-name {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: .04em;
+}
+.founder-name span {
+  font-family: var(--serif-en);
+  font-style: italic;
+  font-size: 12px;
+  color: var(--earth-light);
+  margin-left: 12px;
+  letter-spacing: .08em;
+}
+.founder-title {
+  font-size: 12px;
+  color: var(--water);
+  letter-spacing: .04em;
+  margin: 9px 0 16px;
+}
+.founder-lead {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.9;
+  margin-bottom: 22px;
+}
+.founder-link {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 0.5px solid var(--water-light);
+  padding-bottom: 1px;
+  transition: border-color .25s;
+}
+.founder-link:hover { border-color: var(--water); }
+.founder-link .sz-en {
+  font-family: var(--serif-en);
+  font-style: italic;
+  letter-spacing: .06em;
+  color: var(--earth);
+}
+.founder-bio {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--earth);
+  line-height: 2.15;
+  margin-bottom: 26px;
+}
+.founder-facts {
+  border-top: 0.5px solid var(--sand-deeper);
+  padding-top: 18px;
+}
+.founder-fact { display: flex; gap: 16px; padding: 8px 0; }
+.founder-fact .ff-label {
+  flex-shrink: 0;
+  width: 66px;
+  color: var(--water);
+  font-size: 11px;
+  letter-spacing: .06em;
+  padding-top: 1px;
+}
+.founder-fact .ff-val {
+  flex: 1;
+  color: var(--earth-light);
+  font-size: 11.5px;
+  font-weight: 300;
+  line-height: 1.85;
+}
+
 /* ========== RESPONSIVE ========== */
 @media (max-width: 900px) {
   nav { padding: 18px 24px; }
@@ -994,6 +1073,9 @@ footer {
   footer { padding: 32px 24px; flex-direction: column; gap: 16px; text-align: center; }
   .footer-right { align-items: center; }
   .pain-grid, .vs-grid, .compare-grid, .coach-grid { grid-template-columns: 1fr; }
+  .founder { padding: 30px 24px; }
+  .founder-fact { flex-direction: column; gap: 3px; }
+  .founder-fact .ff-label { width: auto; }
   .sec-divider { padding: 0 24px; }
 
   body { font-size: 16px; }
@@ -1371,6 +1453,35 @@ footer {
   </div>
 </section>
 
+<div class="sec-divider">
+  <div class="sec-divider-line"></div>
+  <div class="sec-divider-drop"></div>
+  <div class="sec-divider-line"></div>
+</div>
+
+<!-- SECTION 7 : FOUNDER -->
+<section class="sec">
+  <div class="sec-inner fade-in">
+    <div class="sec-eyebrow">
+      <div class="sec-eyebrow-line"></div>
+      <div class="sec-eyebrow-text">Founder</div>
+    </div>
+    <h2 class="sec-headline">本音を話せる場所が、<br>自分にも必要でした。</h2>
+    <p class="sec-body">AIが最適解を出す時代に、「本当はどこへ向かいたいのか」という問いと静かに向き合える場所を——自分の手で、つくりました。</p>
+    <div class="founder">
+      <div class="founder-name">力石 晃寿<span>Chikaraishi Akihisa</span></div>
+      <div class="founder-title">Glimpse合同会社 代表社員 ／ プロフェッショナルコーチ</div>
+      <div class="founder-lead">株式会社リクルートエージェントを経て、Glimpse合同会社を創業。</div>
+      <p class="founder-bio">リクルートで転職エージェントに従事した後、Sansan株式会社、株式会社コドモン、キャディ株式会社など、SaaS・製造領域の事業会社で新規事業や組織づくりに携わる。国内最大手のコーチング機関である株式会社コーチ・エィのプログラムで資格を取得し、プロコーチとして活動。「ととのった頭で、経営を問い直す」時間を経営者に届けるため、<a href="#" class="founder-link">SyncZone <span class="sz-en">for executives</span></a> を立ち上げました。</p>
+      <div class="founder-facts">
+        <div class="founder-fact"><span class="ff-label">資格</span><span class="ff-val">（一財）生涯学習開発財団認定コーチ ／ 認定プロフェッショナルコーチ</span></div>
+        <div class="founder-fact"><span class="ff-label">運営会社</span><span class="ff-val">Glimpse合同会社（体験型コーチングプログラム「SyncZone」／ 採用コンサルティング ／ 新規事業開発）</span></div>
+        <div class="founder-fact"><span class="ff-label">所在地</span><span class="ff-val">〒251-0032 神奈川県藤沢市片瀬357-6</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-sec" id="cta">
   <div class="cta-inner">
@@ -1416,6 +1527,7 @@ footer {
   <a href="#" class="footer-logo">SyncZone</a>
   <div class="footer-right">
     <div class="footer-tagline">Sauna × Coaching for Executives</div>
+    <div class="footer-copy">運営：Glimpse合同会社　神奈川県藤沢市片瀬357-6</div>
     <div class="footer-copy">© 2025 SyncZone</div>
   </div>
 </footer>
