@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌿 井端裕輝さま｜SyncZone for Ex</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: ui-sans-serif, -apple-system, 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+    background: #fff;
+    color: #37352f;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 220px; height: 100vh;
+    background: #f7f6f3;
+    border-right: 1px solid rgba(55,53,47,0.09);
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    font-size: 13px;
+  }
+  .sidebar-workspace {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    font-weight: 600;
+    font-size: 13px;
+    color: #37352f;
+    border-bottom: 1px solid rgba(55,53,47,0.09);
+  }
+  .ws-icon {
+    width: 22px; height: 22px;
+    background: #1A5F6A;
+    border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    color: white;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .sidebar-nav {
+    padding: 6px 4px;
+    overflow-y: auto;
+    flex: 1;
+  }
+  .nav-section {
+    padding: 14px 14px 4px;
+    font-size: 11px;
+    color: rgba(55,53,47,0.5);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: rgba(55,53,47,0.75);
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .nav-item:hover { background: rgba(55,53,47,0.08); }
+  .nav-item.active { background: rgba(55,53,47,0.08); color: #37352f; font-weight: 600; }
+  .nav-item .icon { font-size: 12px; flex-shrink: 0; }
+  .nav-sub { padding-left: 18px; }
+
+  /* Privacy notice in sidebar */
+  .sidebar-privacy {
+    margin: 8px 8px 4px;
+    background: #fffbeb;
+    border: 1px solid #fcd34d;
+    border-radius: 5px;
+    padding: 7px 9px;
+    font-size: 11px;
+    color: #92400e;
+    line-height: 1.5;
+  }
+
+  /* Main */
+  .main {
+    margin-left: 220px;
+    min-height: 100vh;
+  }
+
+  /* Cover image */
+  .cover {
+    width: 100%;
+    height: 160px;
+    background: linear-gradient(135deg, #1A5F6A 0%, #3DB8B8 50%, #1E7B7B 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .cover-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 80%, rgba(255,255,255,0.08) 0%, transparent 40%),
+      radial-gradient(circle at 80% 20%, rgba(245,200,66,0.15) 0%, transparent 40%);
+  }
+  .cover-text {
+    position: absolute;
+    bottom: 16px;
+    right: 20px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.1em;
+  }
+
+  /* Page body */
+  .page-body {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 28px 96px 80px;
+  }
+
+  /* Emoji + title */
+  .page-icon { font-size: 52px; margin-bottom: 8px; margin-top: -36px; position: relative; z-index: 2; }
+  .page-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #37352f;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    letter-spacing: -0.3px;
+  }
+
+  /* Properties */
+  .props {
+    margin-bottom: 24px;
+  }
+  .prop-row {
+    display: flex;
+    align-items: flex-start;
+    min-height: 30px;
+    padding: 2px 0;
+  }
+  .prop-row:hover { background: rgba(55,53,47,0.04); border-radius: 4px; }
+  .prop-key {
+    width: 160px;
+    flex-shrink: 0;
+    font-size: 13px;
+    color: rgba(55,53,47,0.5);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 6px;
+  }
+  .prop-val {
+    flex: 1;
+    font-size: 13px;
+    color: #37352f;
+    padding: 4px 6px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 1px 7px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .badge-red { background: #ffe0e0; color: #c0392b; }
+  .badge-teal { background: #d4f5f5; color: #1A5F6A; }
+  .badge-green { background: #dbf5e6; color: #1e7d4d; }
+  .badge-yellow { background: #fef9c3; color: #854d0e; }
+  .badge-purple { background: #ede9fe; color: #5b21b6; }
+  .badge-gray { background: #f1f0ef; color: #57534e; }
+
+  .show-more {
+    font-size: 12px;
+    color: rgba(55,53,47,0.4);
+    cursor: pointer;
+    padding: 2px 6px;
+    margin-top: 2px;
+  }
+  .show-more:hover { color: rgba(55,53,47,0.7); }
+
+  /* Callout */
+  .callout {
+    background: #f0faf9;
+    border-radius: 4px;
+    padding: 14px 16px;
+    margin-bottom: 28px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    border: 1px solid rgba(61,184,184,0.2);
+  }
+  .callout-icon { font-size: 18px; flex-shrink: 0; }
+  .callout-content { font-size: 13px; color: #37352f; line-height: 1.6; }
+  .callout-title { font-weight: 700; margin-bottom: 2px; color: #1A5F6A; }
+
+  /* Section heading */
+  .db-section {
+    margin-bottom: 32px;
+  }
+  .db-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  .db-header:hover .db-title { color: #1A5F6A; }
+  .db-icon { font-size: 16px; }
+  .db-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #37352f;
+  }
+  .db-subtitle {
+    font-size: 11px;
+    color: rgba(55,53,47,0.4);
+    margin-left: 2px;
+  }
+  .db-actions {
+    margin-left: auto;
+    display: flex;
+    gap: 4px;
+  }
+  .db-btn {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(55,53,47,0.16);
+    background: white;
+    color: rgba(55,53,47,0.6);
+    cursor: pointer;
+  }
+  .db-btn:hover { background: rgba(55,53,47,0.06); }
+  .db-btn-primary {
+    background: rgba(55,53,47,0.06);
+    font-weight: 600;
+    color: #37352f;
+  }
+
+  /* Table */
+  .db-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    border: 1px solid rgba(55,53,47,0.12);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .db-table th {
+    background: #f7f6f3;
+    padding: 6px 10px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(55,53,47,0.5);
+    border-bottom: 1px solid rgba(55,53,47,0.12);
+    border-right: 1px solid rgba(55,53,47,0.08);
+    white-space: nowrap;
+  }
+  .db-table td {
+    padding: 7px 10px;
+    border-bottom: 1px solid rgba(55,53,47,0.07);
+    border-right: 1px solid rgba(55,53,47,0.06);
+    vertical-align: middle;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+  }
+  .db-table tr:last-child td { border-bottom: none; }
+  .db-table tr:hover td { background: rgba(55,53,47,0.03); }
+
+  .row-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+    color: #37352f;
+    text-decoration: none;
+  }
+  .row-title:hover { text-decoration: underline; color: #1A5F6A; }
+  .row-icon { font-size: 14px; }
+
+  .date-cell { color: rgba(55,53,47,0.5); font-size: 12px; }
+  .score-cell { text-align: center; font-weight: 600; }
+  .score-hi { color: #1e7d4d; }
+  .score-mid { color: #d97706; }
+  .score-lo { color: #c0392b; }
+  .text-muted { color: rgba(55,53,47,0.4); font-size: 12px; max-width: 180px; overflow: hidden; text-overflow: ellipsis; }
+
+  .add-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    font-size: 12px;
+    color: rgba(55,53,47,0.4);
+    cursor: pointer;
+    border-top: 1px solid rgba(55,53,47,0.07);
+  }
+  .add-row:hover { background: rgba(55,53,47,0.04); color: rgba(55,53,47,0.7); }
+
+  .divider {
+    border: none;
+    border-top: 1px solid rgba(55,53,47,0.09);
+    margin: 20px 0;
+  }
+
+  /* Footer */
+  .footer-note {
+    font-size: 11.5px;
+    color: rgba(55,53,47,0.4);
+    line-height: 1.7;
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(55,53,47,0.09);
+  }
+
+  /* Audio badge */
+  .audio-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: #1A5F6A;
+    background: #e8f7f7;
+    padding: 1px 6px;
+    border-radius: 3px;
+    text-decoration: none;
+    margin-left: 4px;
+  }
+  .audio-link:hover { background: #d0f0f0; }
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="sidebar-workspace">
+    <div class="ws-icon">Sz</div>
+    SyncZone for Ex
+  </div>
+
+  <div class="sidebar-privacy">
+    🔒 <strong>閲覧制限</strong><br>
+    本人・担当コーチ・運営のみ
+  </div>
+
+  <div class="sidebar-nav">
+    <div class="nav-section">クライアントルーム</div>
+    <div class="nav-item">
+      <span class="icon">🌿</span> 井端裕輝さま
+    </div>
+    <div class="nav-sub">
+      <div class="nav-item active">
+        <span class="icon">📋</span> 井端裕輝さま
+      </div>
+      <div class="nav-item">
+        <span class="icon">📄</span> ご利用案内
+      </div>
+    </div>
+
+    <div class="nav-section">チームスペース</div>
+    <div class="nav-item"><span class="icon">📁</span> SyncZone for Ex</div>
+    <div class="nav-sub">
+      <div class="nav-item"><span class="icon">👥</span> クライアント DB</div>
+      <div class="nav-item"><span class="icon">🗂</span> セッション DB</div>
+      <div class="nav-item"><span class="icon">✅</span> Weekly DB</div>
+      <div class="nav-item"><span class="icon">🎙</span> 録音レビュー DB</div>
+    </div>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="main">
+  <!-- Cover -->
+  <div class="cover">
+    <div class="cover-pattern"></div>
+    <div class="cover-text">SyncZone for Executives</div>
+  </div>
+
+  <div class="page-body">
+    <div class="page-icon">🌿</div>
+    <div class="page-title">井端裕輝さま</div>
+
+    <!-- Properties -->
+    <div class="props">
+      <div class="prop-row">
+        <div class="prop-key">⚡ ステータス</div>
+        <div class="prop-val"><span class="badge badge-red">進行中</span></div>
+      </div>
+      <div class="prop-row">
+        <div class="prop-key">🧑‍💼 担当コーチ</div>
+        <div class="prop-val"><span class="badge badge-teal">平山コーチ</span></div>
+      </div>
+      <div class="prop-row">
+        <div class="prop-key">📅 開始日</div>
+        <div class="prop-val">2026年8月1日</div>
+      </div>
+      <div class="prop-row">
+        <div class="prop-key">🎯 新規理由</div>
+        <div class="prop-val" style="max-width:480px; white-space:normal; line-height:1.5; font-size:12.5px; color:rgba(55,53,47,0.75)">忙しすぎて１時間も自分と向き合っていなかったため、整理する機会が欲しい</div>
+      </div>
+      <div class="prop-row">
+        <div class="prop-key">🌱 目指している状態</div>
+        <div class="prop-val" style="max-width:480px; white-space:normal; line-height:1.5; font-size:12.5px; color:rgba(55,53,47,0.75)">経営者と人間とを分けて整理する（ビジネス、プライベート、健康をうまく言語化するため）</div>
+      </div>
+      <div class="prop-row">
+        <div class="prop-key">🏷 タグ</div>
+        <div class="prop-val">
+          <span class="badge badge-purple">CEO</span>
+          <span class="badge badge-gray">創業者</span>
+        </div>
+      </div>
+      <div class="prop-row">
+        <div class="prop-key">🔗 議事録 URL</div>
+        <div class="prop-val">
+          <a href="https://docs.google.com/document/d/1Uxj6lt-Ri7ksDKowzJeoM9gSWKAkd0ciwtVUlIlRT7I/edit" target="_blank" style="color:#1A5F6A; font-size:12px; text-decoration:none;">
+            📄 docs.google.com/...
+          </a>
+        </div>
+      </div>
+      <div class="show-more">＋ さらに5個のプロパティ</div>
+    </div>
+
+    <!-- Callout -->
+    <div class="callout">
+      <div class="callout-icon">🌿</div>
+      <div class="callout-content">
+        <div class="callout-title">SyncZone for Exへようこそ！</div>
+        ここはあなた専用のページです。いつでも振り返りにご活用ください。<br>
+        <span style="font-size:11.5px; color:rgba(55,53,47,0.5);">閲覧者：本人・担当コーチ・運営のみ。社長含む第三者への共有はありません。</span>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- SESSION DB -->
+    <div class="db-section">
+      <div class="db-header">
+        <span class="db-icon">📈</span>
+        <span class="db-title">セッション履歴</span>
+        <span class="db-subtitle">セッション DB</span>
+        <div class="db-actions">
+          <button class="db-btn db-btn-primary">▤ テーブル</button>
+          <button class="db-btn">＋ 新規</button>
+        </div>
+      </div>
+      <table class="db-table">
+        <thead>
+          <tr>
+            <th style="width:220px">Av セッション名</th>
+            <th>日数</th>
+            <th>担当コード</th>
+            <th>4と6レビュー</th>
+            <th>印象に残った言葉</th>
+            <th>繰り返したワード</th>
+            <th>音声</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <a class="row-title" href="#">
+                <span class="row-icon">📄</span>
+                2026/08/01 — 初回
+              </a>
+            </td>
+            <td class="date-cell">1</td>
+            <td><span class="badge badge-red" style="font-size:11px">平山 麗奈</span></td>
+            <td class="date-cell">—</td>
+            <td class="text-muted">「CEOの仮面を外したい」</td>
+            <td class="text-muted">仕組み、エネルギー、旅</td>
+            <td><a href="#" class="audio-link">🎙 再生</a></td>
+          </tr>
+          <tr>
+            <td>
+              <a class="row-title" href="#">
+                <span class="row-icon">📄</span>
+                2026/08/29 — 2回目
+              </a>
+            </td>
+            <td class="date-cell">2</td>
+            <td><span class="badge badge-red" style="font-size:11px">平山 麗奈</span></td>
+            <td class="date-cell">—</td>
+            <td class="text-muted">「手放すことと諦めることは違う」</td>
+            <td class="text-muted">守る、決断、手放し</td>
+            <td><a href="#" class="audio-link">🎙 再生</a></td>
+          </tr>
+          <tr>
+            <td>
+              <a class="row-title" href="#">
+                <span class="row-icon">📄</span>
+                2026/09/26 — 3回目
+              </a>
+            </td>
+            <td class="date-cell">3</td>
+            <td><span class="badge badge-red" style="font-size:11px">平山 麗奈</span></td>
+            <td class="date-cell">—</td>
+            <td class="text-muted">「人間としての自分から始めたい」</td>
+            <td class="text-muted">次のステージ、問い</td>
+            <td><a href="#" class="audio-link">🎙 再生</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="add-row">＋ 新規</div>
+    </div>
+
+    <!-- WEEKLY DB -->
+    <div class="db-section">
+      <div class="db-header">
+        <span class="db-icon">📊</span>
+        <span class="db-title">コンディションの軌跡</span>
+        <span class="db-subtitle">Weekly DB</span>
+        <div class="db-actions">
+          <button class="db-btn db-btn-primary">▤ テーブル</button>
+          <button class="db-btn">＋ 新規</button>
+        </div>
+      </div>
+      <table class="db-table">
+        <thead>
+          <tr>
+            <th style="width:200px">Av Weekly</th>
+            <th>日数</th>
+            <th>メンタル</th>
+            <th>身体的かんじ</th>
+            <th>仕事の充実</th>
+            <th>仕事しんど</th>
+            <th>また一言</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a class="row-title" href="#"><span class="row-icon">📝</span>2026/09/26 7:07 週末</a></td>
+            <td class="date-cell">12</td>
+            <td class="score-cell score-hi">9</td>
+            <td class="score-cell score-hi">8</td>
+            <td class="score-cell score-hi">9</td>
+            <td class="score-cell score-mid">5</td>
+            <td class="text-muted">次のテーマが見えてきた感覚</td>
+          </tr>
+          <tr>
+            <td><a class="row-title" href="#"><span class="row-icon">📝</span>2026/09/07 3:41 週末</a></td>
+            <td class="date-cell">10</td>
+            <td class="score-cell score-hi">8</td>
+            <td class="score-cell score-hi">8</td>
+            <td class="score-cell score-mid">7</td>
+            <td class="score-cell score-mid">6</td>
+            <td class="text-muted">S3後、少し落ち着いている</td>
+          </tr>
+          <tr>
+            <td><a class="row-title" href="#"><span class="row-icon">📝</span>2026/08/10 4:06 週末</a></td>
+            <td class="date-cell">10</td>
+            <td class="score-cell score-mid">6</td>
+            <td class="score-cell score-mid">7</td>
+            <td class="score-cell score-mid">6</td>
+            <td class="score-cell score-hi">8</td>
+            <td class="text-muted">SA後多忙。でもスッキリした</td>
+          </tr>
+          <tr>
+            <td><a class="row-title" href="#"><span class="row-icon">📝</span>2026/08/01 3:04 週末</a></td>
+            <td class="date-cell">10</td>
+            <td class="score-cell score-mid">7</td>
+            <td class="score-cell score-mid">6</td>
+            <td class="score-cell score-mid">7</td>
+            <td class="score-cell score-mid">5</td>
+            <td class="text-muted">意外の難しさにチャレンジ中</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="add-row">＋ 新規</div>
+    </div>
+
+    <!-- MESSAGE TO FUTURE SELF -->
+    <div class="db-section">
+      <div class="db-header">
+        <span class="db-icon">💌</span>
+        <span class="db-title">未来の自分へのメッセージ</span>
+        <span class="db-subtitle">セッション DB</span>
+        <div class="db-actions">
+          <button class="db-btn db-btn-primary">▤ テーブル</button>
+          <button class="db-btn">＋ 新規</button>
+        </div>
+      </div>
+      <table class="db-table">
+        <thead>
+          <tr>
+            <th style="width:200px">Av セッション</th>
+            <th>未来の自分への一言</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a class="row-title" href="#"><span class="row-icon">📄</span>2026/09/26 — 3回目</a></td>
+            <td class="text-muted" style="max-width:400px; white-space:normal">「今の問いを、いつか笑って話せる日が来ると信じている」</td>
+          </tr>
+          <tr>
+            <td><a class="row-title" href="#"><span class="row-icon">📄</span>2026/08/29 — 2回目</a></td>
+            <td class="text-muted" style="max-width:400px; white-space:normal">「手放した先に、本当の自分がいた」</td>
+          </tr>
+          <tr>
+            <td><a class="row-title" href="#"><span class="row-icon">📄</span>2026/08/01 — 初回</a></td>
+            <td class="text-muted" style="max-width:400px; white-space:normal">「仮面を外すことを、怖がらなくて良かった」</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="add-row">＋ 新規</div>
+    </div>
+
+    <div class="footer-note">
+      🔒 このページの閲覧者は <strong>本人（井端裕輝様）・担当コーチ（平山コーチ）・SyncZone運営</strong> のみです。<br>
+      社長を含む第三者（他の参加者・経営陣）には公開されません。セッション内容・発話データはすべて本人の資産として保管されます。
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
