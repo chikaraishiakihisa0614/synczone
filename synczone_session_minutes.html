@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SyncZone for Ex 初回セッション議事録</title>
+<title>SyncZone for Ex — Session 1 議事録</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -27,26 +27,18 @@
     position: sticky;
     top: 0;
     z-index: 100;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
   }
   .topbar-logo {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 18px;
+    font-size: 17px;
     color: #1A5F6A;
-    font-weight: 600;
-    letter-spacing: -0.3px;
+    font-weight: 700;
   }
-  .topbar-logo span { font-size: 20px; }
-  .topbar-divider { color: #e0e0e0; margin: 0 4px; }
-  .topbar-docname {
-    font-size: 14px;
-    color: #5f6368;
-    max-width: 300px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+  .topbar-divider { color: #dadce0; }
+  .topbar-docname { font-size: 13px; color: #5f6368; }
   .topbar-actions { margin-left: auto; display: flex; align-items: center; gap: 8px; }
   .topbar-btn {
     font-size: 12px;
@@ -55,14 +47,8 @@
     border: 1px solid #dadce0;
     background: white;
     color: #3c4043;
-    cursor: pointer;
-    font-weight: 500;
   }
-  .topbar-btn-teal {
-    background: #1A5F6A;
-    color: white;
-    border-color: #1A5F6A;
-  }
+  .topbar-btn-teal { background: #1A5F6A; color: white; border-color: #1A5F6A; }
   .lock-badge {
     display: flex;
     align-items: center;
@@ -81,7 +67,6 @@
     display: flex;
     align-items: flex-end;
     padding: 0 60px;
-    gap: 0;
   }
   .tab {
     padding: 10px 20px;
@@ -89,67 +74,42 @@
     color: #5f6368;
     cursor: pointer;
     border-bottom: 3px solid transparent;
-    white-space: nowrap;
-    font-weight: 400;
-    transition: all 0.15s;
   }
-  .tab:hover { background: #f8f9fa; color: #202124; }
-  .tab.active {
-    color: #1A5F6A;
-    border-bottom-color: #1A5F6A;
-    font-weight: 500;
-  }
+  .tab.active { color: #1A5F6A; border-bottom-color: #1A5F6A; font-weight: 500; }
 
   /* Document canvas */
   .canvas {
     max-width: 816px;
-    margin: 32px auto 80px;
+    margin: 28px auto 80px;
     background: white;
-    padding: 72px 80px 80px;
+    padding: 64px 80px 80px;
     box-shadow: 0 1px 3px rgba(60,64,67,0.12), 0 1px 2px rgba(60,64,67,0.08);
-    min-height: 800px;
   }
 
   /* Doc header */
-  .doc-title {
-    font-size: 26px;
-    font-weight: 400;
-    color: #202124;
-    margin-bottom: 4px;
-    line-height: 1.3;
-  }
-  .doc-subtitle {
-    font-size: 16px;
-    color: #5f6368;
-    font-weight: 400;
+  .doc-title { font-size: 26px; font-weight: 400; color: #202124; margin-bottom: 4px; }
+  .doc-subtitle { font-size: 15px; color: #5f6368; margin-bottom: 20px; }
+
+  .meta-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    font-size: 11.5px;
+    color: #9aa0a6;
     margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f1f3f4;
   }
 
   /* Info table */
-  .info-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-    margin-bottom: 28px;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  .info-table td {
-    padding: 9px 14px;
-    border-bottom: 1px solid #e0e0e0;
-    vertical-align: top;
-  }
+  .info-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 20px; border: 1px solid #e0e0e0; border-radius: 4px; overflow: hidden; }
+  .info-table td { padding: 8px 14px; border-bottom: 1px solid #e8eaed; vertical-align: top; }
   .info-table tr:last-child td { border-bottom: none; }
-  .info-table td:first-child {
-    width: 130px;
-    font-weight: 600;
-    color: #5f6368;
-    background: #f8f9fa;
-    border-right: 1px solid #e0e0e0;
-    white-space: nowrap;
-  }
-  .info-table td:last-child { color: #202124; }
+  .info-table td:first-child { width: 130px; font-weight: 600; color: #5f6368; background: #f8f9fa; border-right: 1px solid #e0e0e0; white-space: nowrap; }
+  .chip { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 12px; font-size: 11.5px; font-weight: 500; margin: 1px 2px; }
+  .chip-teal { background: #e0f5f5; color: #1A5F6A; }
+  .chip-yellow { background: #fef9c3; color: #854d0e; }
+  .chip-gray { background: #f1f3f4; color: #5f6368; }
 
   /* Lock note */
   .lock-note {
@@ -160,349 +120,211 @@
     color: #5f3d00;
     margin-bottom: 28px;
     border-radius: 0 4px 4px 0;
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    line-height: 1.5;
+    line-height: 1.55;
   }
 
   /* Section headers */
-  h2 {
-    font-size: 15px;
-    font-weight: 600;
-    color: #202124;
-    margin: 28px 0 10px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid #e8eaed;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  h2 .section-icon { font-size: 17px; }
+  h2 { font-size: 15px; font-weight: 600; color: #202124; margin: 32px 0 10px; padding-bottom: 6px; border-bottom: 1px solid #e8eaed; }
+  h3 { font-size: 13.5px; font-weight: 600; color: #1A5F6A; margin: 18px 0 7px; }
+  p { font-size: 13.5px; color: #3c4043; margin-bottom: 10px; line-height: 1.75; }
 
-  h3 {
-    font-size: 13.5px;
-    font-weight: 600;
-    color: #1A5F6A;
-    margin: 18px 0 8px;
-  }
-
-  p {
-    font-size: 13.5px;
-    color: #3c4043;
-    margin-bottom: 10px;
-    line-height: 1.7;
-  }
-
-  /* Bullet list */
-  ul.doc-list {
-    padding-left: 0;
-    list-style: none;
-    margin-bottom: 12px;
-  }
+  ul.doc-list { padding-left: 0; list-style: none; margin-bottom: 12px; }
   ul.doc-list li {
     font-size: 13.5px;
     color: #3c4043;
-    padding: 4px 0 4px 24px;
+    padding: 4px 0 4px 20px;
     position: relative;
     line-height: 1.65;
   }
-  ul.doc-list li::before {
-    content: '•';
-    position: absolute;
-    left: 8px;
-    color: #9aa0a6;
-  }
-  ul.doc-list.emoji-list li { padding-left: 30px; }
-  ul.doc-list.emoji-list li::before { content: none; }
-  ul.doc-list.emoji-list li .em {
-    position: absolute;
-    left: 0;
-    font-size: 14px;
-  }
+  ul.doc-list li::before { content: '•'; position: absolute; left: 6px; color: #9aa0a6; }
 
-  /* Highlight callout */
-  .callout-teal {
-    background: #e8f7f7;
-    border-left: 3px solid #3DB8B8;
-    padding: 10px 14px;
-    font-size: 13px;
-    color: #1A5F6A;
-    margin: 12px 0;
-    border-radius: 0 4px 4px 0;
-    line-height: 1.65;
-  }
-  .callout-gray {
-    background: #f8f9fa;
-    border-left: 3px solid #dadce0;
-    padding: 10px 14px;
-    font-size: 13px;
-    color: #5f6368;
-    margin: 12px 0;
-    border-radius: 0 4px 4px 0;
-    font-style: italic;
-    line-height: 1.65;
-  }
-
-  /* Chip */
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    padding: 2px 9px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 500;
-    margin: 2px 3px 2px 0;
-  }
-  .chip-teal { background: #e0f5f5; color: #1A5F6A; }
-  .chip-yellow { background: #fef9c3; color: #854d0e; }
-  .chip-gray { background: #f1f3f4; color: #5f6368; }
+  /* Callouts */
+  .callout-teal { background: #e8f7f7; border-left: 3px solid #3DB8B8; padding: 10px 14px; font-size: 13px; color: #1A5F6A; margin: 12px 0; border-radius: 0 4px 4px 0; line-height: 1.65; }
+  .callout-gray { background: #f8f9fa; border-left: 3px solid #dadce0; padding: 10px 14px; font-size: 13px; color: #5f6368; margin: 12px 0; border-radius: 0 4px 4px 0; font-style: italic; line-height: 1.65; }
+  .callout-yellow { background: #fffde7; border-left: 3px solid #f5c842; padding: 10px 14px; font-size: 13px; color: #5f3d00; margin: 12px 0; border-radius: 0 4px 4px 0; line-height: 1.65; }
 
   /* Quote */
-  .quote-block {
-    border-left: 3px solid #1A5F6A;
-    margin: 14px 0;
-    padding: 8px 16px;
-    background: #f0faf9;
-    border-radius: 0 4px 4px 0;
-  }
-  .quote-block p {
-    font-size: 14px;
-    font-style: italic;
-    color: #1A5F6A;
-    margin-bottom: 4px;
-  }
+  .quote-block { border-left: 3px solid #1A5F6A; margin: 14px 0; padding: 8px 16px; background: #f0faf9; border-radius: 0 4px 4px 0; }
+  .quote-block p { font-size: 14px; font-style: italic; color: #1A5F6A; margin-bottom: 4px; }
   .quote-source { font-size: 11.5px; color: #9aa0a6; font-style: normal !important; }
 
-  /* Divider */
-  hr.doc-divider {
-    border: none;
-    border-top: 1px solid #e8eaed;
-    margin: 24px 0;
+  hr.doc-divider { border: none; border-top: 1px solid #e8eaed; margin: 26px 0; }
+
+  /* Next session */
+  .next-box { background: #f0faf9; border: 1px solid rgba(61,184,184,0.3); border-radius: 6px; padding: 14px 18px; margin-top: 28px; }
+  .next-box-title { font-size: 13px; font-weight: 600; color: #1A5F6A; margin-bottom: 10px; }
+  .next-action { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; font-size: 13px; color: #3c4043; line-height: 1.6; }
+  .next-action-num {
+    width: 20px; height: 20px;
+    background: #1A5F6A; color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700;
+    flex-shrink: 0; margin-top: 1px;
   }
 
-  /* Next session box */
-  .next-box {
-    background: #f0faf9;
-    border: 1px solid rgba(61,184,184,0.3);
-    border-radius: 6px;
-    padding: 14px 18px;
-    margin-top: 24px;
-  }
-  .next-box-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: #1A5F6A;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .next-box ul { list-style: none; padding: 0; }
-  .next-box ul li {
-    font-size: 13px;
-    color: #3c4043;
-    padding: 3px 0 3px 16px;
-    position: relative;
-  }
-  .next-box ul li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: #3DB8B8;
-    font-size: 11px;
-  }
-
-  /* Footer */
-  .doc-footer {
-    margin-top: 48px;
-    padding-top: 16px;
-    border-top: 1px solid #e8eaed;
-    font-size: 11.5px;
-    color: #9aa0a6;
-    line-height: 1.7;
-  }
-
-  /* Keyword highlight */
-  .kw {
-    background: #fff9c4;
-    border-radius: 2px;
-    padding: 0 2px;
-    font-weight: 500;
-    color: #5f3d00;
-  }
-
-  /* Word count etc */
-  .meta-bar {
-    font-size: 11px;
-    color: #9aa0a6;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 28px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid #f1f3f4;
-  }
-  .meta-bar span { display: flex; align-items: center; gap: 4px; }
+  .doc-footer { margin-top: 40px; padding-top: 14px; border-top: 1px solid #e8eaed; font-size: 11px; color: #9aa0a6; line-height: 1.8; }
+  .kw { background: #fff9c4; border-radius: 2px; padding: 0 2px; font-weight: 500; color: #5f3d00; }
 </style>
 </head>
 <body>
 
-<!-- Top bar -->
 <div class="topbar">
-  <div class="topbar-logo">
-    <span>🌿</span> SyncZone for Ex
-  </div>
+  <div class="topbar-logo">🌿 SyncZone for Ex</div>
   <div class="topbar-divider">|</div>
-  <div class="topbar-docname">初回セッション議事録 — 山田太郎様</div>
+  <div class="topbar-docname">Session 1 議事録 — 山田太郎様</div>
   <div class="topbar-actions">
     <div class="lock-badge">🔒 本人・担当コーチ・運営のみ</div>
-    <button class="topbar-btn">印刷</button>
     <button class="topbar-btn topbar-btn-teal">↓ ダウンロード</button>
   </div>
 </div>
 
-<!-- Session tabs -->
 <div class="tabs-bar">
   <div class="tab active">Session 1（初回）</div>
   <div class="tab">Session 2</div>
   <div class="tab">Session 3</div>
 </div>
 
-<!-- Document -->
 <div class="canvas">
   <div class="doc-title">SyncZone for Ex セッション議事録</div>
-  <div class="doc-subtitle">CEOの仮面を外す旅</div>
+  <div class="doc-subtitle">Session 1（初回）— CEOの仮面を外す旅、はじまり</div>
 
   <div class="meta-bar">
-    <span>📄 Session 1（初回）</span>
-    <span>📅 2026年8月1日</span>
+    <span>📅 2026年8月1日（土）</span>
     <span>⏱ 60分</span>
-    <span>🎙 音声記録あり</span>
+    <span>👤 山田太郎様 × 田中コーチ</span>
+    <span>📍 オンライン（Zoom）</span>
   </div>
 
-  <!-- Info table -->
   <table class="info-table">
-    <tr>
-      <td>クライアント</td>
-      <td>山田太郎 様</td>
-    </tr>
-    <tr>
-      <td>担当コーチ</td>
-      <td>田中コーチ</td>
-    </tr>
-    <tr>
-      <td>セッション</td>
-      <td>Session 1（初回）</td>
-    </tr>
-    <tr>
-      <td>日付</td>
-      <td>2026年8月1日（土）</td>
-    </tr>
-    <tr>
-      <td>実施形式</td>
-      <td>オンライン（Zoom）</td>
-    </tr>
-    <tr>
-      <td>繰り返したワード</td>
-      <td>
-        <span class="chip chip-teal">仕組み</span>
-        <span class="chip chip-teal">エネルギー</span>
-        <span class="chip chip-yellow">旅</span>
-        <span class="chip chip-gray">CEOの仮面</span>
-      </td>
-    </tr>
+    <tr><td>クライアント</td><td>山田太郎 様</td></tr>
+    <tr><td>担当コーチ</td><td>田中コーチ</td></tr>
+    <tr><td>セッション</td><td>Session 1（初回）/ 全9回 3ヶ月プログラム</td></tr>
+    <tr><td>繰り返したワード</td><td>
+      <span class="chip chip-teal">仕組み ×5</span>
+      <span class="chip chip-teal">エネルギー ×4</span>
+      <span class="chip chip-yellow">旅 ×3</span>
+      <span class="chip chip-gray">CEOの仮面 ×2</span>
+      <span class="chip chip-gray">整理 ×2</span>
+    </td></tr>
+    <tr><td>印象に残った言葉</td><td style="font-style:italic; color:#1A5F6A; font-size:13px">「CEOの仮面を外したい——そもそも仮面をかぶっていることを、今日初めて認識した気がする。」</td></tr>
   </table>
 
   <div class="lock-note">
-    🔒 <span>このドキュメントは <strong>山田太郎様・田中コーチ・SyncZone運営</strong> のみ閲覧できます。社長を含む第三者への開示はありません。</span>
+    🔒 このドキュメントは <strong>山田太郎様・田中コーチ・SyncZone運営</strong> のみ閲覧できます。社内・社外を問わず、第三者への開示はありません。
   </div>
 
-  <!-- Section 1 -->
-  <h2><span class="section-icon">🧭</span> 今回のテーマ</h2>
+  <h2>今回のテーマ</h2>
 
-  <p>初回セッションは、山田様が「なぜSyncZoneに参加したのか」という出発点を言語化することから始まりました。</p>
+  <p>初回セッションは、山田様が「なぜSyncZoneに参加したのか」という出発点を言語化することから始まりました。会話の中で繰り返し出てきた言葉は <span class="kw">「整理」</span> でした。数字やKPIではなく、自分自身の内側を整理したい——そのような参加動機が、言葉を重ねるごとに輪郭を持ち始めました。</p>
+
+  <p>テーマとして浮かび上がったのは、<strong>「CEOという役割」と「人間としての自分」を分けて整理する</strong>、というものでした。山田様はここ数年、ビジネス・プライベート・健康の3つの軸を切り分けて考える時間がまったく持てていないと話していました。「考えようとした瞬間に、次の判断が来る」という表現が印象的でした。</p>
 
   <div class="callout-teal">
-    「忙しすぎて、1時間も自分と向き合っていなかった。整理する機会が欲しかった。」
+    「忙しすぎて、1時間も自分と向き合っていなかった。今日が、たぶんここ数年で一番長く自分の話をした時間だと思う。」
   </div>
-
-  <p>テーマとして浮かび上がったのは、<span class="kw">「CEOという役割」と「人間としての自分」を分けて整理する</span>、というものでした。山田様はここ数年、ビジネス・プライベート・健康の3つを切り分けて考えることができていないと話していました。</p>
-
-  <h3>セッション前のコンディション（自己申告）</h3>
-  <ul class="doc-list emoji-list">
-    <li><span class="em">🧠</span> メンタル：7 / 10　「落ち着いている。ただ、いつ崩れるかわからない感覚」</li>
-    <li><span class="em">💪</span> 身体的かんじ：6 / 10　「睡眠が浅い。週2回は会食で帰宅が遅い」</li>
-    <li><span class="em">🔥</span> 仕事の充実：7 / 10　「成果は出ているが、自分がやりたいことかどうかわからなくなっている」</li>
-    <li><span class="em">😮‍💨</span> 仕事のしんどさ：5 / 10　「しんどいというより、虚無感がある」</li>
-  </ul>
 
   <hr class="doc-divider">
 
-  <!-- Section 2 -->
-  <h2><span class="section-icon">🚀</span> 旅の起点</h2>
+  <h2>旅の起点 ——なぜ今、ここに来たか</h2>
 
-  <h3>なぜ今、コーチングを選んだのか</h3>
-  <p>山田様は「社外の人間に話せる場が欲しかった」と話しました。社内では常に判断を求められるポジションにあり、自分自身が迷っている状態を見せることへのハードルが高いとのことでした。</p>
+  <h3>参加動機</h3>
+  <p>山田様は創業8年目。会社は順調に成長し、社員も増え、外から見れば「うまくいっている経営者」の典型です。しかし山田様自身は、「自分がやりたいことをやっているのかどうか、最近わからなくなってきた」と話していました。成果は出ている。数字も動いている。だからこそ、「これでいいのか？」という問いを誰にも言えない、という状況がずっと続いていたとのことでした。</p>
+
+  <p>社内では常に判断を求められるポジションにあり、自分が迷っている状態を見せることへの心理的なハードルが高い。家族には「大丈夫」と話してしまう。友人との会話はどうしても表面的になる。「SyncZoneに申し込んだのは、どこかで話せる場が欲しかったから」という言葉は、セッションの核心を最初から指していました。</p>
 
   <div class="callout-gray">
     「社長として話すことには慣れているが、"人間として"話す場がない。家族にも、ここまでは言えない。」
   </div>
 
-  <h3>これまでの自分について</h3>
-  <ul class="doc-list">
-    <li>創業から8年。会社は成長したが、自分の「成長実感」が薄れてきている</li>
-    <li>以前はビジョンを語るのが好きだったが、最近は「正しい答えを出す」モードになっている</li>
-    <li>「仕組み」という言葉を何度も使っていた——社内にも、自分の人生にも「仕組みが欲しい」</li>
-  </ul>
-
-  <h3>印象に残った言葉</h3>
-  <div class="quote-block">
-    <p>「CEOの仮面を外したい、というか——そもそも仮面をかぶっていることを、今日初めて認識した気がする。」</p>
-    <div class="quote-source">— 山田太郎様（セッション中の発言）</div>
-  </div>
-
-  <h3>田中コーチからの観察メモ</h3>
-  <ul class="doc-list">
-    <li>「仕組み」「エネルギー」「旅」という語が繰り返し登場——抽象化で物事を捉えるタイプ</li>
-    <li>自己開示のスピードが速い。信頼を築くのが得意な方だと感じた</li>
-    <li>「答えを知っている」状態で話してくれることが多い——問いを立てると自分で展開していく</li>
-    <li>今後のセッションでは「正解を出さない問い」に居続ける練習が鍵になりそう</li>
-  </ul>
+  <h3>セッション前のコンディション</h3>
+  <p>事前アンケートでは、メンタル・仕事の充実感ともに「7/10」、身体的なコンディションは「6/10」と回答。「睡眠が浅い。週に2〜3回は会食で帰りが遅い」とのことで、身体的な疲労がベースにある状態でのセッション開始でした。仕事の「しんどさ」スコアは「5/10」——しんどいというより、虚無感がある、という表現が補足としてありました。</p>
 
   <hr class="doc-divider">
 
-  <!-- Section 3 -->
-  <h2><span class="section-icon">🌱</span> 気づきと持ち帰るもの</h2>
+  <h2>セッションの流れと主な会話</h2>
 
-  <h3>このセッションでの気づき</h3>
-  <ul class="doc-list emoji-list">
-    <li><span class="em">💡</span> 「仮面をかぶっていること」を意識できた——これがスタートラインだと気づいた</li>
-    <li><span class="em">💡</span> ビジネス・プライベート・健康を切り分けて「言語化」したことがなかった</li>
-    <li><span class="em">💡</span> 「エネルギーが湧く瞬間」と「消耗する瞬間」が明確にある——まだ言葉になっていない</li>
-  </ul>
+  <h3>① チェックイン（〜10分）</h3>
+  <p>コンディション確認からスタート。山田様は「緊張はしていないが、どこから話せばいいかわからない」と笑いながら話し始めました。田中コーチが「何でも言葉になったものから話してもらえれば」と伝えると、少しずつ言葉が出てきました。この最初の「言葉が出てくるまでの間」をコーチが丁寧に待ったことが、その後の会話の深さにつながりました。</p>
 
-  <h3>未来の自分へのメッセージ（本人記入）</h3>
-  <div class="callout-teal" style="font-style: italic; font-size: 14px; color: #1A5F6A;">
+  <h3>② 参加動機・背景（10〜25分）</h3>
+  <p>創業からの経緯、現在の会社の状況、最近の気持ちの変化について話しました。特に印象的だったのは、「5年前は迷わなかった。最近は、決断するたびに少し疲れる」という発言です。経営判断そのものが重くなったのではなく、「自分が何を大切にして決めているのかがぼやけてきた」ことへの疲弊感が根本にあるようでした。</p>
+
+  <p>田中コーチの「整理したい、とおっしゃいましたが——整理できた状態って、どんな感じですか？」という問いに対して、山田様はしばらく考えたあと「軽い、かな。頭が、じゃなくて、なんか全体的に」と答えました。</p>
+
+  <h3>③ 自己認識の深掘り（25〜45分）</h3>
+  <p>ここがセッションの転換点でした。「CEOとしての自分と、人間としての自分——今この場にいるのは、どちらですか？」という田中コーチの問いに、山田様はすぐに答えられませんでした。「……両方いる気がするけど、どちらが前に出ているかでいうと、CEOのほうが前にいる。ここでも。」という言葉のあと、しばらく沈黙がありました。</p>
+
+  <p>その沈黙の中で、山田様が自ら語り始めたのが「CEOの仮面」という表現でした。「仮面という言葉、今初めて使ったけど——かぶっていることを、今日まで認識していなかった気がする。というか、仮面をかぶっていることが当たり前になりすぎて、自分の素顔がどんな顔だったか、わからなくなっているかもしれない。」</p>
+
+  <div class="quote-block">
+    <p>「CEOの仮面を外したい——そもそも仮面をかぶっていることを、今日初めて認識した気がする。」</p>
+    <div class="quote-source">— 山田太郎様（Session 1, 32分頃）</div>
+  </div>
+
+  <h3>④ 気づきの言語化（45〜55分）</h3>
+  <p>「旅」という比喩が山田様の口から出てきたのはこのフェーズです。「なんか、旅みたいだな、このプログラム。どこに着くかわからない旅。でも、目的地がない旅は苦手なんですよね、自分は」という発言に対して、田中コーチが「目的地を決めなくていい旅というのは、どんな旅でしょう？」と返しました。</p>
+
+  <p>山田様はしばらく考えたあと、「……あったかいところに向かっている旅、かな。なんかそんな感じ。明るい方向に向かっていれば、途中はどんな道でもいい」と答えました。この「あたたかい方向への旅」というイメージが、3ヶ月間を通じたひとつのテーマになりそうです。</p>
+
+  <h3>⑤ クロージング・次回設定（55〜60分）</h3>
+  <p>「今日の1時間を一言で表すと？」というコーチの問いに、「気づいた、かな。何かに気づいたというより、気づいていなかったことに気づいた、という感じ」と答えました。最後に「未来の自分へのメッセージ」として、山田様自身が記入したのが以下の一文です。</p>
+
+  <div class="callout-teal" style="font-size:14.5px; font-weight:500; font-style:italic; color:#1A5F6A">
     「仮面を外すことを、怖がらなくて良かった。」
   </div>
 
   <hr class="doc-divider">
 
-  <!-- Next session -->
-  <div class="next-box">
-    <div class="next-box-title">🗓 次回セッション（Session 2）へ向けて</div>
-    <ul>
-      <li>「エネルギーが湧く瞬間」を1週間観察してメモしておく</li>
-      <li>「CEOとしての自分」と「人間としての自分」——それぞれに一言で名前をつけてみる</li>
-      <li>Weeklyコンディションアンケートに取り組む（毎週金曜）</li>
-    </ul>
+  <h2>気づきと持ち帰るもの</h2>
+
+  <ul class="doc-list">
+    <li>「仮面をかぶっていること」を意識できた——これがこの3ヶ月のスタートラインだと気づいた</li>
+    <li>ビジネス・プライベート・健康を切り分けて「言語化」したことが、これまでほとんどなかった</li>
+    <li>「整理したい」という動機の奥に、「自分として生きたい」という欲求があることに気づいた</li>
+    <li>「エネルギーが湧く瞬間」と「消耗する瞬間」が明確にある——まだ言葉になっていない部分が多くある</li>
+    <li>目的地を決めない旅への抵抗感がある一方で、「あたたかい方向への旅」ならできる気がする、という感覚を得た</li>
+  </ul>
+
+  <div class="callout-yellow">
+    <strong>田中コーチメモ：</strong>「仮面」という比喩が自発的に出てきたことが印象的でした。次回は「どんな仮面か」「いつからかぶっているか」「外したとき何が見えるか」を一緒に探っていきたいと思います。また、「エネルギーが湧く瞬間」の観察を1週間続けてもらうことで、次回の会話の素材を豊かにできそうです。
   </div>
 
-  <!-- Footer -->
+  <hr class="doc-divider">
+
+  <h2>コーチからの問い（セッション中に投げかけた問い）</h2>
+
+  <ul class="doc-list">
+    <li>「今、あなたの中で『整理したい』とおっしゃったのは、具体的にどんな状態になることを指していますか？」</li>
+    <li>「CEOとしての自分と、人間としての自分——今この場にいるのは、どちらですか？」</li>
+    <li>「エネルギーが湧く瞬間と消耗する瞬間、最近どちらが多いですか？」</li>
+    <li>「目的地を決めなくていい旅というのは、どんな旅でしょう？」</li>
+    <li>「3ヶ月後、このプログラムが終わったとき——どんな自分でいたいですか？」</li>
+  </ul>
+
+  <hr class="doc-divider">
+
+  <div class="next-box">
+    <div class="next-box-title">🗓 次回（Session 2）に向けたホームワーク</div>
+    <div class="next-action">
+      <div class="next-action-num">1</div>
+      <div>「エネルギーが湧く瞬間」を1週間観察してメモする（場所・状況・誰といるとき）</div>
+    </div>
+    <div class="next-action">
+      <div class="next-action-num">2</div>
+      <div>「CEOとしての自分」と「人間としての自分」に、それぞれ一言で名前をつけてみる</div>
+    </div>
+    <div class="next-action">
+      <div class="next-action-num">3</div>
+      <div>週次コンディションアンケートに回答する（毎週金曜18時に届きます）</div>
+    </div>
+    <div style="margin-top:10px; padding-top:10px; border-top:1px solid rgba(61,184,184,0.2); font-size:11.5px; color:#9aa0a6">
+      📅 次回予定：2026年8月29日（土）/ 担当：田中コーチ
+    </div>
+  </div>
+
   <div class="doc-footer">
-    📄 本議事録はSyncZone for Exシステムにより自動生成・整理されました。<br>
-    内容の修正・追記は担当コーチまでご連絡ください。<br>
+    本議事録はSyncZone for Exシステムにより作成されました。内容の修正・追記は担当コーチまでご連絡ください。<br>
     閲覧権限：山田太郎様 / 田中コーチ / SyncZone運営　※第三者への共有不可
   </div>
 </div>
